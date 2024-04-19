@@ -1,0 +1,27 @@
+{
+    "name": "web-container",
+    "service": "web",
+    "workspaceFolder": "/app",
+    "dockerComposeFile": "../../docker-compose.yml",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "formulahendry.auto-close-tag",
+                "aeschli.vscode-css-formatter",
+                "pranaygp.vscode-css-peek",
+                "kaiwood.endwise",
+                "ecmel.vscode-html-css",
+                "anteprimorac.html-end-tag-labels",
+                "kisstkondoros.vscode-gutter-preview",
+                "oderwat.indent-rainbow",
+                "zignd.html-css-class-completion",
+                "ms-ceintl.vscode-language-pack-ja",
+                "ritwickdey.liveserver",
+                "ionutvmi.path-autocomplete",
+                "shopify.ruby-lsp",
+                "shardulm94.trailing-spaces",
+                "mosapride.zenkaku"
+            ]
+        }
+    }
+}
