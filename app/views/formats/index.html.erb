@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="btn">
+    <%= link_to '登録する', new_format_path %>
+  </div>
+  <div class="formats">
+    <% @formats.each do |format| %>
+      <div class="format">
+        <div class="format-name"><%= format.group_id %>/<%= format.group_name %></div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

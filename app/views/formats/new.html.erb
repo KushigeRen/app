@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<%= form_with(model: @format, url: formats_path, local: true) do |form| %>
+  <h1>グループ名を入力</h1>
+  <div class="group" maxlength="20">
+    <%= form.label :group_name, "グループ名" %>
+    <%= form.text_field :group_name, maxlength: 15 %>
+  </div>
+  <div class="members" id="members">
+    <div class="member">
+      <%= form.label :member_name1, "メンバー名" %>
+      <%= form.text_field :member_name1, maxlength: 15 %>
+      <%= form.hidden_field :group_id, value: @group_id %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= form.submit "登録する" %>
+  </div>
+<% end %>
+<%= button_tag "追加", id: "add-member" %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var addButton = document.getElementById("add-member");
+  var membersDiv = document.getElementById("members");
+  var memberId = 2; // 最初のメンバー名の入力欄が既に存在しているので、2から始める
+
+  addButton.addEventListener("click", function() {
+    var newMemberDiv = document.createElement("div");
+    newMemberDiv.classList.add("member");
+
+    var textField = document.createElement("input");
+    textField.setAttribute("type", "text");
+    textField.setAttribute("maxlength", 15);
+    textField.setAttribute("name", "group_member[member_name" + memberId + "]");
+    textField.setAttribute("id", "group_member_member_name" + memberId );
+    newMemberDiv.appendChild(textField);
+
+    var groupIdField = document.createElement("input");
+    groupIdField.setAttribute("type", "hidden");
+    groupIdField.setAttribute("name", "group_member[group_id]");
+    groupIdField.setAttribute("id", "group_member_group_id");
+    groupIdField.setAttribute("value", "<%= @group_id %>");
+    newMemberDiv.appendChild(groupIdField);
+
+    membersDiv.appendChild(newMemberDiv);
+
+    memberId++;
+  });
+});
+</script>
+</body>
+</html>
+
+

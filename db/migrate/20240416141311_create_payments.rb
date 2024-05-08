@@ -3,7 +3,7 @@ class CreatePayments < ActiveRecord::Migration[7.0]
     create_table :payments, primary_key: :payment_id do |t|
       t.bigint :creditor_member_id, null:false
       t.bigint :debtor_member_id, null:false
-      t.bigint :team_id, null:false
+      t.bigint :group_id, null:false
       t.integer :amount, null:false
       t.date :payment_date, null:false
       t.date :payment_deadline

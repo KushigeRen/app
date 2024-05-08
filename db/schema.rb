@@ -12,17 +12,17 @@
 
 ActiveRecord::Schema[7.0].define(version: 2024_04_16_141311) do
   create_table "members", primary_key: "member_id", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "team_id", null: false
+    t.bigint "group_id", null: false
     t.string "member_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "fk_rails_e330ef0ccc"
+    t.index ["group_id"], name: "fk_rails_e330ef0ccc"
   end
 
   create_table "payments", primary_key: "payment_id", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "creditor_member_id", null: false
     t.bigint "debtor_member_id", null: false
-    t.bigint "team_id", null: false
+    t.bigint "group_id", null: false
     t.integer "amount", null: false
     t.date "payment_date", null: false
     t.date "payment_deadline"
@@ -33,13 +33,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_16_141311) do
     t.index ["debtor_member_id"], name: "fk_rails_d6dca917e5"
   end
 
-  create_table "teams", primary_key: "team_id", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "team_name", null: false
+  create_table "groups", primary_key: "group_id", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "group_name", null: false
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "members", "teams", primary_key: "team_id"
+  add_foreign_key "members", "groups", primary_key: "group_id"
   add_foreign_key "payments", "members", column: "creditor_member_id", primary_key: "member_id"
   add_foreign_key "payments", "members", column: "debtor_member_id", primary_key: "member_id"
 end

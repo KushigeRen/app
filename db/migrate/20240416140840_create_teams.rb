@@ -1,7 +1,8 @@
-class CreateTeams < ActiveRecord::Migration[7.0]
+class CreateGroups < ActiveRecord::Migration[7.0]
   def change
-    create_table :teams, primary_key: :team_id do |t|
-      t.string :team_name, null: false
+    create_table :groups, primary_key: :group_id do |t|
+      t.string :group_name, null: false
+      t.string :token
 
       t.timestamps
     end
