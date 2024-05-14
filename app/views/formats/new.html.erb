@@ -8,7 +8,7 @@
 <body>
 <%= form_with(model: @format, url: formats_path, local: true) do |form| %>
   <h1>グループ名を入力</h1>
-  <div class="group" maxlength="20">
+  <div class="group">
     <%= form.label :group_name, "グループ名" %>
     <%= form.text_field :group_name, maxlength: 15 %>
   </div>

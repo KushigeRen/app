@@ -10,5 +10,9 @@
     <% @members.each do |member| %>
         <div class="member-name"><%= member.member_name %></div>
     <% end %>
+    <%= link_to '明細を記録する', payments_new_path(token: @group.token) %>
+    <% @payments.each do |payment| %>
+        <div class="payment"><%= payment.debtor_member_id %>⇨<%= payment.creditor_member_id %>:<%= payment.amount %>円</div>
+    <% end %>
 </body>
 </html>

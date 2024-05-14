@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=q, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<%= form_with(model: @payment, url: payments_create_path, local: true) do |form| %>
+    <div class="mb-3">
+        <div class="dropdown">
+            <%= form.label :creditor_member_id,'Select Member'%>
+            <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_id] })  %>
+        </div>
+    </div>
+    が
+    <div class="mb-3">
+        <div class="dropdown">
+            <%= form.label :debtor_member_id,'Select Member'%>
+            <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_id] })  %>
+        </div>
+    </div>
+    に
+    <div class="mb-3">
+        <div class="description">
+            <%= form.text_field :description, maxlength: 30 %>
+        </div>
+    </div>
+    代として
+    <div class="mb-3">
+        <div class="amount">
+            <%= form.number_field :amount %>円立て替えた。
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="payment_day">
+            <%= form.hidden_field :payment_date, value: Date.today %>
+        </div>
+    </div>
+    <%= form.hidden_field :group_id, value: @group.group_id %>
+    <div class="actions">
+        <%= form.submit "登録する" %>
+    </div>
+<% end %>
+
+<script>
+    $(document).ready(function() {
+        $('.from').click(function() {
+            var selectedItem = $(this).text().trim();
+            $('#dropdownMenuButton1').text(selectedItem);
+        });
+        $('.to').click(function() {
+            var selectedItem = $(this).text().trim();
+            $('#dropdownMenuButton2').text(selectedItem);
+        });
+        var element = document.getElementById("dropdownMenuButton1")
+    });
+</script>
+</body>
+</html>

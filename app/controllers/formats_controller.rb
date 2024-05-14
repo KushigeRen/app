@@ -9,6 +9,7 @@ class FormatsController < ApplicationController
   def show
     @group = Group.find_by(token: params[:token])
     @members = Member.where(group_id: @group.group_id)
+    @payments = Payment.where(group_id: @group.group_id)
   end
 
   def new
@@ -27,8 +28,7 @@ class FormatsController < ApplicationController
     @format = GroupMember.new(format_params)
     if @format.save(get_member_name)
       @group = Group.find(@format.group_id)
-      group_page_url = "http://localhost:3000/group/#{@group.token}"
-      redirect_to group_page_url
+      redirect_to group_show_path(token: @group.token)
     else
       render "new"
     end
