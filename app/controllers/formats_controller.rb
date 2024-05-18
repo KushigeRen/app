@@ -3,13 +3,14 @@ class FormatsController < ApplicationController
   @@member_name = []
 
   def index
-    @formats = Group.includes(:member)
+    @formats = Group.includes(:members)
   end
 
   def show
     @group = Group.find_by(token: params[:token])
     @members = Member.where(group_id: @group.group_id)
     @payments = Payment.where(group_id: @group.group_id)
+    # PaymentのメンバーIDはidじゃなくて名前で格納した方がいいかも
   end
 
   def new
@@ -32,6 +33,10 @@ class FormatsController < ApplicationController
     else
       render "new"
     end
+  end
+
+  def id_to_name(debtor_member_id,creditor_member_id)
+    Member.find
   end
 
   # クラス変数（配列）にmember_name(連番)のパラメータの値を格納

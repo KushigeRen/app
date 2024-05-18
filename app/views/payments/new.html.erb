@@ -11,14 +11,14 @@
     <div class="mb-3">
         <div class="dropdown">
             <%= form.label :creditor_member_id,'Select Member'%>
-            <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_id] })  %>
+            <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] })  %>
         </div>
     </div>
     が
     <div class="mb-3">
         <div class="dropdown">
             <%= form.label :debtor_member_id,'Select Member'%>
-            <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_id] })  %>
+            <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] })  %>
         </div>
     </div>
     に

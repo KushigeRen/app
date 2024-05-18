@@ -15,7 +15,6 @@ class GroupMember
         member_count = obj.get_member_name.count
         token = SecureRandom.hex(16)
         group = Group.create(group_id: group_id, group_name: group_name, token: token)
-        group_page_url = "http://localhost:3000/group/#{token}"
         member_count.times do |i|
             Member.create(member_name: params[i], group_id: group_id)
         end

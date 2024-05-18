@@ -1,4 +1,4 @@
 class Group < ApplicationRecord
-    has_many :member
+    has_many :members, foreign_key: 'group_id'
 
 end
