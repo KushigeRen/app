@@ -15,7 +15,23 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def edit
+    @payment = Payment.find(params[:id])
+    @group = Group.find(@payment.group_id)
+    @members = Member.where(group_id: @group.group_id)
+    @creditor_member = Member.find_by(member_id: @payment.creditor_member_id)
+    @debtor_member =Member.find_by(member_id: @payment.debtor_member_id)
+    # 編集画面のメンバーの初期表示うまくいってない
+  end
+
   def update
+    @payment = Payment.find(params[:id])
+    @group = Group.find_by(group_id: @payment.group_id)
+    if @payment.update(payment_params)
+      redirect_to group_show_path(token: @group.token)
+    else
+      render 'new'
+    end
   end
 
   def destroy

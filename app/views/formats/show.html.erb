@@ -13,6 +13,7 @@
     <%= link_to '明細を記録する', payments_new_path(token: @group.token) %>
     <% @payments.each do |payment| %>
         <div class="payment"><%= payment.creditor_member.member_name %>⇨<%= payment.debtor_member.member_name %>:<%= payment.amount %>円</div>
+        <%= link_to '編集', edit_payment_path(id: payment.payment_id) %>
     <% end %>
 </body>
 </html>

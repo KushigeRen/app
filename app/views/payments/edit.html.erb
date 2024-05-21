@@ -7,18 +7,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<%= form_with(model: @payment, url: payments_path, local: true) do |form| %>
+<%= form_with(model: @payment, url: payment_path, local: true) do |form| %>
     <div class="mb-3">
         <div class="dropdown">
             <%= form.label :creditor_member_id,'Select Member'%>
-            <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] })  %>
+            <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] }, @creditor_member.member_id)  %>
         </div>
     </div>
     が
     <div class="mb-3">
         <div class="dropdown">
             <%= form.label :debtor_member_id,'Select Member'%>
-            <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] })  %>
+            <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] }, @debtor_member.member_id)  %>
         </div>
     </div>
     に
