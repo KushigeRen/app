@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'formats#index'
   resources :payments, only: [:create, :edit, :update, :destroy]
-  resources :formats, only: [:index, :new, :create]
+  resources :formats, only: [:index, :new, :create, :edit, :update, :destroy]
 end

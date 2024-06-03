@@ -26,34 +26,40 @@
 <%= button_tag "追加", id: "add-member" %>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  var addButton = document.getElementById("add-member");
-  var membersDiv = document.getElementById("members");
-  var memberId = 2; // 最初のメンバー名の入力欄が既に存在しているので、2から始める
+  document.addEventListener("turbo:load", function() {
+    var addButton = document.getElementById("add-member");
+    if (addButton) {
+      // 既存のクリックイベントリスナーを解除
+      var oldElement = addButton.cloneNode(true);
+      addButton.parentNode.replaceChild(oldElement, addButton);
 
-  addButton.addEventListener("click", function() {
-    var newMemberDiv = document.createElement("div");
-    newMemberDiv.classList.add("member");
+    var membersDiv = document.getElementById("members");
+    var memberId = 2; // 最初のメンバー名の入力欄が既に存在しているので、2から始める
 
-    var textField = document.createElement("input");
-    textField.setAttribute("type", "text");
-    textField.setAttribute("maxlength", 15);
-    textField.setAttribute("name", "group_member[member_name" + memberId + "]");
-    textField.setAttribute("id", "group_member_member_name" + memberId );
-    newMemberDiv.appendChild(textField);
+    oldElement.addEventListener("click", function() {
+      var newMemberDiv = document.createElement("div");
+      newMemberDiv.classList.add("member");
 
-    var groupIdField = document.createElement("input");
-    groupIdField.setAttribute("type", "hidden");
-    groupIdField.setAttribute("name", "group_member[group_id]");
-    groupIdField.setAttribute("id", "group_member_group_id");
-    groupIdField.setAttribute("value", "<%= @group_id %>");
-    newMemberDiv.appendChild(groupIdField);
+      var textField = document.createElement("input");
+      textField.setAttribute("type", "text");
+      textField.setAttribute("maxlength", 15);
+      textField.setAttribute("name", "group_member[member_name" + memberId + "]");
+      textField.setAttribute("id", "group_member_member_name" + memberId );
+      newMemberDiv.appendChild(textField);
 
-    membersDiv.appendChild(newMemberDiv);
+      var groupIdField = document.createElement("input");
+      groupIdField.setAttribute("type", "hidden");
+      groupIdField.setAttribute("name", "group_member[group_id]");
+      groupIdField.setAttribute("id", "group_member_group_id");
+      groupIdField.setAttribute("value", "<%= @group_id %>");
+      newMemberDiv.appendChild(groupIdField);
 
-    memberId++;
+      membersDiv.appendChild(newMemberDiv);
+
+      memberId++;
+    });
+    }
   });
-});
 </script>
 </body>
 </html>

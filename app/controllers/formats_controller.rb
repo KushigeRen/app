@@ -10,9 +10,10 @@ class FormatsController < ApplicationController
     @group = Group.find_by(token: params[:token])
     @members = Member.where(group_id: @group.group_id)
     @payments = Payment.where(group_id: @group.group_id)
-    # PaymentのメンバーIDはidじゃなくて名前で格納した方がいいかも
   end
 
+
+  # --- グループとメンバーを作成する ---
   def new
     @format = GroupMember.new
     # 新規作成するグループのIDを採番
@@ -35,8 +36,31 @@ class FormatsController < ApplicationController
     end
   end
 
-  def id_to_name(debtor_member_id,creditor_member_id)
-    Member.find
+
+  # --- メンバー情報を更新・削除する ---
+  def edit
+    @member = Member.find(params[:id])
+    @group = Group.find_by(group_id: @member.group_id)
+    @format = GroupMember.new
+  end
+
+  def update
+    @member = Member.find(params[:id])
+    @group = Group.find_by(group_id: @member.group_id)
+    if @member.update(member_params)
+      redirect_to group_show_path(token: @group.token)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @member = Member.find(params[:id])
+    @group = Group.find_by(group_id: @member.group_id)
+    if @member.destroy
+      flash[:notice] = "メンバーを削除しました"
+      redirect_to group_show_path(token: @group.token)
+    end
   end
 
   # クラス変数（配列）にmember_name(連番)のパラメータの値を格納
@@ -58,5 +82,9 @@ class FormatsController < ApplicationController
     member_names = params[:group_member].keys.select { |key| key.to_s.start_with?("member_name") }#member_name(連番)のキーを変数に格納
     permitted_params = [:group_name, :group_id] + member_names
     params.require(:group_member).permit(permitted_params)
+  end
+
+  def member_params
+    params.require(:member).permit(:member_id, :member_name, :group_id)
   end
 end
