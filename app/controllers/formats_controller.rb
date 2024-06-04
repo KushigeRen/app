@@ -35,13 +35,28 @@ class FormatsController < ApplicationController
       render "new"
     end
   end
+  # --------------------------------
 
+  # --- グループ名を更新する ---
+  def edit_group
+    @group = Group.find(params[:id])
+  end
 
-  # --- メンバー情報を更新・削除する ---
+  def update_group
+    binding.pry
+    @group = Group.find(params[:id])
+    if @group.update(group_params)
+      redirect_to group_show_path(token: @group.token)
+    else
+      render 'edit_group'
+    end
+  end
+  # -------------------------
+
+  # --- メンバー情報を追加・更新・削除する ---
   def edit
     @member = Member.find(params[:id])
     @group = Group.find_by(group_id: @member.group_id)
-    @format = GroupMember.new
   end
 
   def update
@@ -63,6 +78,22 @@ class FormatsController < ApplicationController
     end
   end
 
+  def add_member
+    @member = Member.new
+    @group = Group.find(params[:id])
+  end
+
+  def create_member
+    @member = Member.new(member_params)
+    @group = Group.find_by(group_id: @member.group_id)
+    if @member.save
+      redirect_to group_show_path(token: @group.token)
+    else
+      render 'add'
+    end
+  end
+  # --------------------------------
+
   # クラス変数（配列）にmember_name(連番)のパラメータの値を格納
   def set_member_name
     @@member_name.clear
@@ -82,6 +113,10 @@ class FormatsController < ApplicationController
     member_names = params[:group_member].keys.select { |key| key.to_s.start_with?("member_name") }#member_name(連番)のキーを変数に格納
     permitted_params = [:group_name, :group_id] + member_names
     params.require(:group_member).permit(permitted_params)
+  end
+
+  def group_params
+    params.require(:group).permit(:group_id, :group_name, :token)
   end
 
   def member_params

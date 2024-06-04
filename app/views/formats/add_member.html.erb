@@ -6,15 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <%= form_with(model: @member, url: format_path, local: true, method: :put) do |form| %>
+    <%= form_with(model: @member, url: create_member_format_path, local: true) do |form| %>
         <div class="member">
             <%= form.label :member_name, "メンバー名" %>
-            <%= form.text_field :member_name, maxlength: 15, value: @member.member_name %>
-            <%= form.hidden_field :member_id, value: @member.member_id %>
+            <%= form.text_field :member_name, maxlength: 15 %>
             <%= form.hidden_field :group_id, value: @group.group_id %>
         </div>
         <div class="actions">
-            <%= form.submit "変更する" %>
+            <%= form.submit "追加する" %>
         </div>
     <% end %>
 </body>
