@@ -43,7 +43,6 @@ class FormatsController < ApplicationController
   end
 
   def update_group
-    binding.pry
     @group = Group.find(params[:id])
     if @group.update(group_params)
       redirect_to group_show_path(token: @group.token)

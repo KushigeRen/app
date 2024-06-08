@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=q, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <%= form_with(model: @payment, url: payment_path, local: true) do |form| %>
@@ -43,19 +42,5 @@
         <%= form.submit "登録する" %>
     </div>
 <% end %>
-
-<script>
-    $(document).ready(function() {
-        $('.from').click(function() {
-            var selectedItem = $(this).text().trim();
-            $('#dropdownMenuButton1').text(selectedItem);
-        });
-        $('.to').click(function() {
-            var selectedItem = $(this).text().trim();
-            $('#dropdownMenuButton2').text(selectedItem);
-        });
-        var element = document.getElementById("dropdownMenuButton1")
-    });
-</script>
 </body>
 </html>

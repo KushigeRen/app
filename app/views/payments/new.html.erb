@@ -11,14 +11,14 @@
     <div class="mb-3">
         <div class="dropdown">
             <%= form.label :creditor_member_id,'Select Member'%>
-            <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] })  %>
+            <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] }), include_blank: "Select a member" %>
         </div>
     </div>
     が
     <div class="mb-3">
         <div class="dropdown">
             <%= form.label :debtor_member_id,'Select Member'%>
-            <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] })  %>
+            <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] }), include_blank: "Select a member" %>
         </div>
     </div>
     に
@@ -43,19 +43,5 @@
         <%= form.submit "登録する" %>
     </div>
 <% end %>
-
-<script>
-    $(document).ready(function() {
-        $('.from').click(function() {
-            var selectedItem = $(this).text().trim();
-            $('#dropdownMenuButton1').text(selectedItem);
-        });
-        $('.to').click(function() {
-            var selectedItem = $(this).text().trim();
-            $('#dropdownMenuButton2').text(selectedItem);
-        });
-        var element = document.getElementById("dropdownMenuButton1")
-    });
-</script>
 </body>
 </html>

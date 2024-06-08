@@ -19,12 +19,35 @@
     <% end %>
     <%= link_to '追加', add_member_format_path(id: @group.group_id) %>
     <p class="mt-3 mb-0">支払い明細</p>
+    <select id="members">
+        <option value="" id="member">Select a member</option>
+        <%= options_for_select(@members.map { |member| [member.member_name, member.member_name] }) %>
+    </select>
     <% @payments.each do |payment| %>
-        <div class="payment"><%= payment.creditor_member.member_name %>⇨<%= payment.debtor_member.member_name %>:<%= payment.amount %>円
+        <div class="payment"><span id="creditor_member"><%= payment.creditor_member.member_name %></span>⇨<%= payment.debtor_member.member_name %>:<%= payment.amount %>円
         <%= link_to '編集', edit_payment_path(id: payment.payment_id) %>
         <%= link_to '完了', payment_path(id: payment.payment_id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
         </div>
     <% end %>
     <%= link_to '明細を記録する', payments_new_path(token: @group.token) %>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selectElement = document.getElementById('members');
+            var payments = document.querySelectorAll('.payment');
+
+            selectElement.addEventListener('change', function() {
+                var selectedMember = selectElement.value;
+
+                payments.forEach(function(payment) {
+                    var creditorName = payment.querySelector('#creditor_member').innerText;
+                    if (selectedMember === "" || creditorName === selectedMember) {
+                        payment.style.display = 'block';
+                    } else {
+                        payment.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
