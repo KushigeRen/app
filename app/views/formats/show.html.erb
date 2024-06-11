@@ -7,6 +7,7 @@
 </head>
 <body>
     <div class="container">
+        <p id="notice"><%= notice %></p>
         <div class="col-12">
             グループ名：<%= @group.group_name %>
             <%= link_to '編集', edit_group_format_path(id: @group.group_id) %>
@@ -37,7 +38,7 @@
     </div>
     <script>
         // 支払い明細絞り込み
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener("turbo:load", function() {
             var selectElement = document.getElementById('members');
             var payments = document.querySelectorAll('.payment');
 
@@ -57,17 +58,15 @@
     </script>
     <script>
         // URLコピー
-        document.addEventListener('DOMContentLoaded', function(){
-            var copyButton = document.getElementById('copy_url_button')
+        var copyButton = document.getElementById('copy_url_button')
 
-            copyButton.addEventListener('click', function(){
-                var currentUrl = window.location.href;
+        copyButton.addEventListener('click', function(){
+            var currentUrl = window.location.href;
 
-                navigator.clipboard.writeText(currentUrl).then(function(){
-                    alert('URLがクリップボードにコピーされました');
-                }).catch(function(err){
-                    console.error('URLのコピーに失敗しました:',err);
-                });
+            navigator.clipboard.writeText(currentUrl).then(function(){
+                alert('URLがクリップボードにコピーされました');
+            }).catch(function(err){
+                console.error('URLのコピーに失敗しました:',err);
             });
         });
     </script>

@@ -6,9 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <%= form_with(model: @group, url: update_group_format_path, local: true, method: :put) do |form| %>
+    <%= bootstrap_form_with(model: @group, url: update_group_format_path, local: true, method: :put) do |form| %>
         <div class="group">
-            <%= form.label :group_name, "グループ名" %>
             <%= form.text_field :group_name, maxlength: 15 %>
             <%= form.hidden_field :group_id, value: @group.group_id %>
             <%= form.hidden_field :token, value: @group.token %>

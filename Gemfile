@@ -74,4 +74,5 @@ end
 gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 gem 'jquery-rails'
 gem 'sassc-rails'
+gem "bootstrap_form", "~> 5.4"
 

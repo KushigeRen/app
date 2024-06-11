@@ -6,9 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <%= form_with(model: @member, url: create_member_format_path, local: true) do |form| %>
+    <%= bootstrap_form_with(model: @member, url: create_member_format_path, local: true) do |form| %>
         <div class="member">
-            <%= form.label :member_name, "メンバー名" %>
             <%= form.text_field :member_name, maxlength: 15 %>
             <%= form.hidden_field :group_id, value: @group.group_id %>
         </div>

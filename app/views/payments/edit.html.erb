@@ -6,17 +6,16 @@
     <title>Document</title>
 </head>
 <body>
-<%= form_with(model: @payment, url: payment_path, local: true) do |form| %>
+<%= render "shared/error", obj: @payment%>
+<%= bootstrap_form_with(model: @payment, url: payment_path, local: true) do |form| %>
     <div class="mb-3">
         <div class="dropdown">
-            <%= form.label :creditor_member_id,'Select Member'%>
             <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] }, @creditor_member.member_id)  %>
         </div>
     </div>
     が
     <div class="mb-3">
         <div class="dropdown">
-            <%= form.label :debtor_member_id,'Select Member'%>
             <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] }, @debtor_member.member_id)  %>
         </div>
     </div>

@@ -4,6 +4,13 @@ class FormatsController < ApplicationController
 
   def index
     @formats = Group.includes(:members)
+    @format = GroupMember.new
+    # 新規作成するグループのIDを採番
+    if Group.count == 0
+      @group_id = 1
+    else
+      @group_id = Group.maximum(:group_id) + 1
+    end
   end
 
   def show
@@ -14,16 +21,6 @@ class FormatsController < ApplicationController
 
 
   # --- グループとメンバーを作成する ---
-  def new
-    @format = GroupMember.new
-    # 新規作成するグループのIDを採番
-    if Group.count == 0
-      @group_id = 1
-    else
-      @group_id = Group.maximum(:group_id) + 1
-    end
-  end
-
   def create
     set_member_name
     GroupMember.create_member_accessors(get_member_name.count)
@@ -32,7 +29,7 @@ class FormatsController < ApplicationController
       @group = Group.find(@format.group_id)
       redirect_to group_show_path(token: @group.token)
     else
-      render "new"
+      render "index"
     end
   end
   # --------------------------------
@@ -45,9 +42,10 @@ class FormatsController < ApplicationController
   def update_group
     @group = Group.find(params[:id])
     if @group.update(group_params)
+      flash[:notice] = "グループ情報を更新しました"
       redirect_to group_show_path(token: @group.token)
     else
-      render 'edit_group'
+      render 'edit_group', status: :unprocessable_entity
     end
   end
   # -------------------------
@@ -62,9 +60,10 @@ class FormatsController < ApplicationController
     @member = Member.find(params[:id])
     @group = Group.find_by(group_id: @member.group_id)
     if @member.update(member_params)
+      flash[:notice] = "メンバー情報を更新しました"
       redirect_to group_show_path(token: @group.token)
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 
@@ -88,7 +87,7 @@ class FormatsController < ApplicationController
     if @member.save
       redirect_to group_show_path(token: @group.token)
     else
-      render 'add'
+      render 'add_member', status: :unprocessable_entity
     end
   end
   # --------------------------------
