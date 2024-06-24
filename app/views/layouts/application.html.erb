@@ -9,8 +9,10 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "turbo", type: "module" %>
   </head>
-
   <body>
+    <div id="flash">
+      <%= render "flash" %>
+    </div>
     <%= yield %>
   </body>
 </html>

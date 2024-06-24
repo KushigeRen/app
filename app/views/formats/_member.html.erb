@@ -1,0 +1,6 @@
+<%= turbo_frame_tag member do %>
+    <div class="member_name"><%= member.member_name %>
+        <%= link_to '編集', edit_format_path(id: member.member_id) %>
+        <%= link_to '削除', format_path(id: member.member_id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+    </div>
+<% end %>

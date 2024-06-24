@@ -1,0 +1,4 @@
+<%= turbo_stream.replace @member do %>
+    <%= render partial: "formats/member",locals: { member: @member } %>
+<% end %>
+<%= turbo_stream_flash %>

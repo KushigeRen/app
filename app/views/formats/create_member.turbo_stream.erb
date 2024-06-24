@@ -1,0 +1,5 @@
+<%= turbo_stream.append "members" do %>
+    <%= render partial: "formats/member",locals: { member: @member } %>
+<% end %>
+<%= turbo_stream.update Member.new, "" %>
+<%= turbo_stream_flash %>

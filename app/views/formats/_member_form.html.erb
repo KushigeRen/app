@@ -1,9 +1,9 @@
-<%= turbo_frame_tag @group do %>
-    <%= bootstrap_form_with(model: @group, url: update_group_format_path, local: true, method: :put) do |form| %>
-        <div class="group">
-            <%= form.text_field :group_name, maxlength: 15 %>
+<%= turbo_frame_tag @member do %>
+    <%= bootstrap_form_with(model: @member, url: format_path, local: true, method: :put) do |form| %>
+        <div class="member">
+            <%= form.text_field :member_name, maxlength: 15, value: @member.member_name %>
+            <%= form.hidden_field :member_id, value: @member.member_id %>
             <%= form.hidden_field :group_id, value: @group.group_id %>
-            <%= form.hidden_field :token, value: @group.token %>
         </div>
         <div class="actions">
             <%= form.submit "変更する", class: "btn btn-primary btn-sm me-2" %>

@@ -1,5 +1,6 @@
 class GroupMember
     include ActiveModel::Model
+    validates :group_name, presence: true
     require 'securerandom'
     attr_accessor :group_name, :group_id, :token
 

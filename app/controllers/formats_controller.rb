@@ -60,8 +60,7 @@ class FormatsController < ApplicationController
     @member = Member.find(params[:id])
     @group = Group.find_by(group_id: @member.group_id)
     if @member.update(member_params)
-      flash[:notice] = "メンバー情報を更新しました"
-      redirect_to group_show_path(token: @group.token)
+      flash.now.notice = "メンバー情報を更新しました。"
     else
       render 'edit', status: :unprocessable_entity
     end
@@ -71,8 +70,8 @@ class FormatsController < ApplicationController
     @member = Member.find(params[:id])
     @group = Group.find_by(group_id: @member.group_id)
     if @member.destroy
-      flash[:notice] = "メンバーを削除しました"
-      redirect_to group_show_path(token: @group.token)
+      flash.now.notice = "メンバー情報を削除しました。"
+      # redirect_to group_show_path(token: @group.token)
     end
   end
 
@@ -85,7 +84,8 @@ class FormatsController < ApplicationController
     @member = Member.new(member_params)
     @group = Group.find_by(group_id: @member.group_id)
     if @member.save
-      redirect_to group_show_path(token: @group.token)
+      flash.now.notice = "メンバー情報を登録しました。"
+      # redirect_to group_show_path(token: @group.token)
     else
       render 'add_member', status: :unprocessable_entity
     end
