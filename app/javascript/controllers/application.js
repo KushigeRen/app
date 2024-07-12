@@ -1,9 +1,9 @@
-import { Application } from "@hotwired/stimulus"
+import { Application } from "../../../node_modules/@hotwired/stimulus"
 
 const application = Application.start()
 
 // Configure Stimulus development experience
-application.debug = false
+application.debug = true
 window.Stimulus   = application
 
 export { application }

@@ -6,4 +6,12 @@ class Payment < ApplicationRecord
     validates :creditor_member_id, presence: true
     validates :debtor_member_id, presence: true
     validates :amount, presence: true
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["creditor_member_id", "debtor_member_id"]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+        ["creditor_member", "debtor_member"]
+    end
 end

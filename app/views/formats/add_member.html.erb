@@ -5,7 +5,8 @@
             <%= form.hidden_field :group_id, value: @group.group_id %>
         </div>
         <div class="actions">
-            <%= form.submit "追加する" %>
+            <%= form.submit "追加する", class: "btn btn-sm btn-outline-primary" %>
+            <%= link_to "キャンセル", group_show_path(token: @group.token), class: "btn btn-sm btn-outline-secondary" %>
         </div>
     <% end %>
 <% end %>

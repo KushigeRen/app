@@ -1,0 +1,4 @@
+<%= turbo_stream.replace @payment do %>
+    <%= render partial: "payments/payment",locals: { payment: @payment } %>
+<% end %>
+<%= turbo_stream_flash %>

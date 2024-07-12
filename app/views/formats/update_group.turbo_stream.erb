@@ -1,0 +1,4 @@
+<%= turbo_stream.replace @group do %>
+    <%= render partial: "formats/group",locals: { group: @group } %>
+<% end %>
+<%= turbo_stream_flash %>

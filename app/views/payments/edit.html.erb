@@ -1,35 +1,3 @@
-<%= render "shared/error", obj: @payment%>
-<%= turbo_frame_tag payment do %>
-    <%= bootstrap_form_with(model: @payment, url: payment_path, local: true) do |form| %>
-        <div class="mb-3">
-            <div class="dropdown">
-                <%= form.select :creditor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] }, @creditor_member.member_id)  %>
-            </div>
-        </div>
-        <div class="mb-3">
-            <div class="dropdown">
-                <%= form.select :debtor_member_id, options_for_select(@members.map { |member| [member.member_name, member.member_id] }, @debtor_member.member_id)  %>
-            </div>
-        </div>
-        <div class="mb-3">
-            <div class="description">
-                <%= form.text_field :description, maxlength: 30 %>
-            </div>
-        </div>
-        <div class="mb-3">
-            <div class="amount">
-                <%= form.number_field :amount %>
-            </div>
-        </div>
-        <div class="mb-3">
-            <div class="payment_day">
-                <%= form.hidden_field :payment_date, value: Date.today %>
-            </div>
-        </div>
-        <%= form.hidden_field :group_id, value: @group.group_id %>
-        <div class="actions">
-            <%= form.submit "登録する" %>
-        </div>
-    <% end %>
+<%= render "modal", title: "編集" do %>
+    <%= render "payment_form", payment: @payment %>
 <% end %>
-

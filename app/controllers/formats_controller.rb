@@ -17,6 +17,9 @@ class FormatsController < ApplicationController
     @group = Group.find_by(token: params[:token])
     @members = Member.where(group_id: @group.group_id)
     @payments = Payment.where(group_id: @group.group_id)
+
+    @search = @payments.ransack(params[:q])
+    @payments = @search.result.includes(:creditor_member).select(:payment_id, :creditor_member_id, :debtor_member_id, :amount)
   end
 
 
@@ -42,8 +45,7 @@ class FormatsController < ApplicationController
   def update_group
     @group = Group.find(params[:id])
     if @group.update(group_params)
-      flash[:notice] = "グループ情報を更新しました"
-      redirect_to group_show_path(token: @group.token)
+      flash.now.notice = "グループ情報を更新しました"
     else
       render 'edit_group', status: :unprocessable_entity
     end
@@ -69,9 +71,15 @@ class FormatsController < ApplicationController
   def destroy
     @member = Member.find(params[:id])
     @group = Group.find_by(group_id: @member.group_id)
+
+    @members = Member.where(group_id: @group.group_id)
+    @payments = Payment.where(group_id: @group.group_id)
+    @search = @payments.ransack(params[:q])
+    @payments = @search.result.includes(:creditor_member).select(:payment_id, :creditor_member_id, :debtor_member_id, :amount)
     if @member.destroy
       flash.now.notice = "メンバー情報を削除しました。"
-      # redirect_to group_show_path(token: @group.token)
+    else
+      flash.now.alert = "このメンバーには関連する支払い情報があるため、削除できません。"
     end
   end
 
@@ -85,7 +93,6 @@ class FormatsController < ApplicationController
     @group = Group.find_by(group_id: @member.group_id)
     if @member.save
       flash.now.notice = "メンバー情報を登録しました。"
-      # redirect_to group_show_path(token: @group.token)
     else
       render 'add_member', status: :unprocessable_entity
     end

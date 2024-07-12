@@ -1,2 +1,4 @@
-<%= turbo_stream.remove @member %>
+<% if @member.errors.size == 0 %>
+    <%= turbo_stream.remove @member %>
+<% end %>
 <%= turbo_stream_flash %>
