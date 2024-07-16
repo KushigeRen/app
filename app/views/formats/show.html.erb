@@ -1,24 +1,34 @@
     <div class="container">
         <%= turbo_frame_tag @group do %>
-            <div class="col-12">
+            <div class="text-center mt-3">
                 <%= render partial: "formats/group", locals: { group: @group } %>
             </div>
         <% end %>
-        <p class="mt-3 mb-0">メンバー</p>
-        <%= link_to '追加', add_member_format_path(id: @group.group_id), data: { turbo_frame: dom_id(Member.new) } %>
-        <div id="members">
-            <%= turbo_frame_tag Member.new %>
+        <p class="mt-3 mb-0">メンバー
+            <span>
+                <%= link_to add_member_format_path(id: @group.group_id), data: { turbo_frame: "modal"} do %>
+                    <i class="bi bi-plus-circle"></i>
+                <% end %>
+            </span>
+        </p>
+        <div id="members" class="d-flex flex-wrap justify-content-start">
             <% @members.each do |member| %>
                 <%= render partial: "formats/member", locals: { member: member } %>
             <% end %>
         </div>
-        <p class="mt-3 mb-0">支払い明細</p>
+        <p class="mt-3 mb-0">支払い明細
+            <span>
+                <%= link_to payments_new_path(token: @group.token), data: { turbo_frame: "modal"} do %>
+                    <i class="bi bi-plus-circle"></i>
+                <% end %>
+            </span>
+        </p>
         <%= search_form_for(@search, url: group_show_path(token: @group.token), html: { data: {
                 turbo_frame: "payment",
                 controller: "form",
                 action: "input->form#submit"
             }}) do |f| %>
-            <%= f.select :creditor_member_member_name_eq,options_for_select(@members.map { |member| [member.member_name, member.member_name] }), { prompt: "Select a Member" } %>
+            <%= f.select :creditor_member_member_name_eq,options_for_select(@members.map { |member| [member.member_name, member.member_name] }), { prompt: "Select a Member" }, { class: "form-select" } %>
         <% end %>
         <div id="payments">
             <%= turbo_frame_tag "payment" do %>
@@ -27,9 +37,8 @@
                 <% end %>
             <% end %>
         </div>
-        <%= link_to '明細を記録する', payments_new_path(token: @group.token), data: { turbo_frame: "modal"} %>
         <div>
-            <button id="copy_url_button">URLをコピー</button>
+            <button id="copy_url_button" class="btn btn-outline-dark">URLをコピー</button>
         </div>
     </div>
     <script>

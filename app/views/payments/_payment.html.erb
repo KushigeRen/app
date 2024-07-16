@@ -7,11 +7,15 @@
             <%= payment.debtor_member.member_name %>
         </div>
         <div class="col-3">
-            <%= payment.amount %>
+            ¥<%= number_with_delimiter(payment.amount) %>
         </div>
         <div class="col-3">
-            <%= link_to '編集', edit_payment_path(id: payment.payment_id), data: { turbo_frame: "modal" } %>
-            <%= link_to '完了', payment_path(id: payment.payment_id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+            <%= link_to edit_payment_path(id: payment.payment_id), class: "edit", data: { turbo_frame: "modal" } do %>
+                <i class="bi bi-pen"></i>
+            <% end %>
+            <%= link_to payment_path(id: payment.payment_id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="bi bi-check-circle"></i>
+            <% end %>
         </div>
     </div>
 <% end %>

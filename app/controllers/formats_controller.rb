@@ -97,6 +97,10 @@ class FormatsController < ApplicationController
       render 'add_member', status: :unprocessable_entity
     end
   end
+
+  def option
+    @member = Member.find(params[:id])
+  end
   # --------------------------------
 
   # クラス変数（配列）にmember_name(連番)のパラメータの値を格納

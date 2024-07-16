@@ -1,6 +1,12 @@
 <%= turbo_frame_tag group do %>
     <div class="group_name">
-        グループ名：<%= group.group_name %>
-        <%= link_to '編集', edit_group_format_path(id: @group.group_id) %>
+        <p class="bold">
+            <%= group.group_name %>
+            <span>
+                <%= link_to edit_group_format_path(id: @group.group_id) do %>
+                    <i class="bi bi-pen"></i>
+                <% end %>
+            </span>
+        </p>
     </div>
 <% end %>
