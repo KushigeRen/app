@@ -1,0 +1,12 @@
+<%= turbo_frame_tag @group do %>
+    <%= bootstrap_form_with(model: @group, url: update_group_format_path, local: true, data: { action: "turbo:submit-end->modal#close" }, method: :put) do |form| %>
+        <div class="group">
+            <%= form.text_field :group_name, maxlength: 15, label_class: "hidden-label" %>
+            <%= form.hidden_field :group_id, value: @group.group_id %>
+            <%= form.hidden_field :token, value: @group.token %>
+        </div>
+        <div class="actions">
+            <%= form.submit "変更する", class: "btn btn-primary btn-sm me-2" %>
+        </div>
+    <% end %>
+<% end %>

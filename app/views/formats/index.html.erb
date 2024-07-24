@@ -1,22 +1,23 @@
-<h1>warikanApp(仮)</h1>
-<p>このアプリは、グループ内でのお金の立て替えを記録します。</p>
-<p>グループ名と参加するメンバーを入力し登録してください。</p>
-<%= bootstrap_form_with(model: @format, url: formats_path, local: true) do |form| %>
-  <div class="group">
-    <%= form.text_field :group_name, maxlength: 15 %>
-  </div>
-  <div class="members" id="members">
-    <div class="member">
-      <%= form.text_field :member_name1, maxlength: 15 %>
-      <%= form.hidden_field :group_id, value: @group_id %>
+<div class="container">
+  <h1>warikanApp(仮)</h1>
+  <p>このアプリは、グループ内でのお金の立て替えを記録します。</p>
+  <p>グループ名と参加するメンバーを入力し登録してください。</p>
+  <%= bootstrap_form_with(model: @format, url: formats_path, local: true) do |form| %>
+    <div class="group">
+      <%= form.text_field :group_name, maxlength: 15, label: "グループ名" %>
     </div>
-  </div>
-  <div class="actions">
-    <%= form.submit "登録する" %>
-  </div>
-<% end %>
-<%= button_tag "追加", id: "add-member" %>
-
+    <div class="members" id="members">
+      <div class="member">
+        <%= form.text_field :member_name1, maxlength: 15 %>
+        <%= form.hidden_field :group_id, value: @group_id %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= form.submit "登録する" %>
+    </div>
+  <% end %>
+  <%= button_tag "追加", id: "add-member" %>
+</div>
 <script>
   document.addEventListener("turbo:load", function() {
     var addButton = document.getElementById("add-member");

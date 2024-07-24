@@ -78,5 +78,6 @@ gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 gem 'jquery-rails'
 gem "bootstrap_form", "~> 5.4"
 gem "ransack"
+gem "rails-i18n"
 
 

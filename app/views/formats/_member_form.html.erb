@@ -1,14 +1,14 @@
 <%= turbo_frame_tag @member do %>
     <%= bootstrap_form_with(model: @member, url: format_path, local: true, data: { action: "turbo:submit-end->modal#close" }, method: :put) do |form| %>
         <div class="member">
-            <%= form.text_field :member_name, maxlength: 15, value: @member.member_name %>
+            <%= form.text_field :member_name, maxlength: 6, value: @member.member_name %>
             <%= form.hidden_field :member_id, value: @member.member_id %>
             <%= form.hidden_field :group_id, value: @group.group_id %>
         </div>
         <%= form.submit "変更する", class: "btn btn-outline-primary w-100 mb-3" %>
     <% end %>
 
-    <%= bootstrap_form_with(model: @member, url: format_path, local: true, data: { turbo_confirm: "Are you sure?", action: "turbo:submit-end->modal#close" }, method: :delete) do |form| %>
+    <%= bootstrap_form_with(model: @member, url: format_path, local: true, data: { turbo_confirm: "このメンバーを削除しますか？", action: "turbo:submit-end->modal#close" }, method: :delete) do |form| %>
         <%= form.submit "削除する", class: "btn btn-outline-danger w-100" %>
     <% end %>
 <% end %>

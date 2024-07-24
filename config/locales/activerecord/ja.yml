@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      group: 'グループ'
+      member: 'メンバー'
+      payment: '支払い'
+    attributes:
+      member:
+        member_name: 'メンバー名'
+      payment:
+        creditor_member_id: '払ったメンバー'
+        debtor_member_id: '払われたメンバー'
+        description: 'メモ'
+        amount: '金額'
+      group:
+        group_name: 'グループ名'

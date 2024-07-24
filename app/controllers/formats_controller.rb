@@ -79,7 +79,7 @@ class FormatsController < ApplicationController
     if @member.destroy
       flash.now.notice = "メンバー情報を削除しました。"
     else
-      flash.now.alert = "このメンバーには関連する支払い情報があるため、削除できません。"
+      flash.now.alert = "このメンバーには関連する支払い明細があるため、削除できません。"
     end
   end
 

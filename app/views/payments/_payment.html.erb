@@ -1,7 +1,10 @@
 <%= turbo_frame_tag payment do %>
-    <div class="row">
+    <div class="row mt-2">
         <div id="creditor_member" class="col-3">
             <%= payment.creditor_member.member_name %>
+        </div>
+        <div class="col-1">
+            ⇨
         </div>
         <div id="debtor_member" class="col-3">
             <%= payment.debtor_member.member_name %>
@@ -9,11 +12,13 @@
         <div class="col-3">
             ¥<%= number_with_delimiter(payment.amount) %>
         </div>
-        <div class="col-3">
+        <div class="col-1">
             <%= link_to edit_payment_path(id: payment.payment_id), class: "edit", data: { turbo_frame: "modal" } do %>
                 <i class="bi bi-pen"></i>
             <% end %>
-            <%= link_to payment_path(id: payment.payment_id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+        </div>
+        <div class="col-1">
+            <%= link_to payment_path(id: payment.payment_id), data: { turbo_method: :delete, turbo_confirm: "支払いを完了します。"} do %>
                 <i class="bi bi-check-circle"></i>
             <% end %>
         </div>
