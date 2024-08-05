@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
     @group = Group.find_by(token: params[:token])
     @members = Member.where(group_id: @group.group_id)
     @creditor_member = Member.new
-    @debtor_member =Member.new
+    @debtor_member = Member.new
   end
 
   def create
@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
     @group = Group.find_by(group_id: @payment.group_id)
     @members = Member.where(group_id: @group.group_id)
     @creditor_member = Member.new
-    @debtor_member =Member.new
+    @debtor_member = Member.new
     if @payment.save
       flash.now.notice = "支払い明細を作成しました"
     else

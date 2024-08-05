@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "payment" do %>
+    <% payments.each do |payment| %>
+        <%= render partial: "payments/payment", locals: { payment: payment } %>
+    <% end %>
+<% end %>

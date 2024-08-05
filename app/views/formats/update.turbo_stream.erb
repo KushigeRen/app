@@ -1,4 +1,13 @@
 <%= turbo_stream.replace @member do %>
     <%= render partial: "formats/member",locals: { member: @member } %>
 <% end %>
+<%= turbo_stream.replace "payment" do %>
+    <% update_payments_info(@member) %>
+    <%= render partial: "formats/payments",locals: { payments: @payments } %>
+<% end %>
+<%= turbo_stream.replace "member_select" do %>
+    <% get_members_info(@member) %>
+    <% get_search_info(@member) %>
+    <%= render partial: "formats/member_select",locals: { members: @members } %>
+<% end %>
 <%= turbo_stream_flash %>

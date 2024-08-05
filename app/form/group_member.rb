@@ -4,10 +4,10 @@ class GroupMember
     require 'securerandom'
     attr_accessor :group_name, :group_id, :token
 
-    # member_name(連番)のattr_accessorを生成
-    def self.create_member_accessors(count)
-        count.times do |i|
-            attr_accessor "member_name#{i+1}".to_sym
+    # member_name_keysのattr_accessorを生成
+    def self.create_member_accessors(member_name_keys)
+        member_name_keys.each do |key|
+            attr_accessor key.to_sym
         end
     end
 

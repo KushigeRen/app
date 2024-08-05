@@ -2,55 +2,57 @@
   <h1>warikanApp(仮)</h1>
   <p>このアプリは、グループ内でのお金の立て替えを記録します。</p>
   <p>グループ名と参加するメンバーを入力し登録してください。</p>
+
   <%= bootstrap_form_with(model: @format, url: formats_path, local: true) do |form| %>
     <div class="group">
       <%= form.text_field :group_name, maxlength: 15, label: "グループ名" %>
     </div>
-    <div class="members" id="members">
-      <div class="member">
-        <%= form.text_field :member_name1, maxlength: 15 %>
-        <%= form.hidden_field :group_id, value: @group_id %>
+    <input type="hidden" id="group_id" name="group_id" value="<%= @group_id %>">
+    <div class="no-required-style">
+      <label class="mb-2">メンバー名</label>
+      <div class="d-flex mb-0">
+        <input type="text" id="inputText" maxlength="6" class="form-control">
+          <button type="button" class="btn btn-link" id="addMemberButton">
+            <i class="bi bi-plus-circle"></i>
+          </button>
       </div>
     </div>
+    <div class="members" id="members"></div>
     <div class="actions">
-      <%= form.submit "登録する" %>
+      <%= form.submit "登録する", class: "btn btn-primary mt-5 w-100" %>
     </div>
   <% end %>
-  <%= button_tag "追加", id: "add-member" %>
 </div>
+
 <script>
-  document.addEventListener("turbo:load", function() {
-    var addButton = document.getElementById("add-member");
-    if (addButton) {
-      // 既存のクリックイベントリスナーを解除
-      var oldElement = addButton.cloneNode(true);
-      addButton.parentNode.replaceChild(oldElement, addButton);
+  document.addEventListener('turbo:load', () => {
+    const addMemberButton = document.getElementById('addMemberButton');
+    const membersContainer = document.getElementById('members');
+    const inputText = document.getElementById('inputText');
+    let memberNumber = 0
 
-    var membersDiv = document.getElementById("members");
-    var memberId = 2; // 最初のメンバー名の入力欄が既に存在しているので、2から始める
+    addMemberButton.addEventListener('click', () => {
+      memberNumber++
+      const memberName = inputText.value.trim();
+      if (memberName === '') return;
 
-    oldElement.addEventListener("click", function() {
-      var newMemberDiv = document.createElement("div");
-      newMemberDiv.classList.add("member");
+      // Create new member element
+      const memberElement = document.createElement('span');
+      memberElement.classList.add('member');
+      memberElement.innerHTML = `
+        <input value="${memberName}" type="hidden" name="group_member[member_name${memberNumber}]" id="group_member_member_name${memberNumber}">
+        <input value="<%=@group_id%>" autocomplete="off" type="hidden" name="group_member[group_id]" id="group_member_group_id">
+        <span class="box me-2 mt-3">${memberName}<button type="button" class="remove-member btn btn-light btn-sm ms-1"><i class="bi bi-x"></i></button></span>
+      `;
 
-      var textField = document.createElement("input");
-      textField.setAttribute("type", "text");
-      textField.setAttribute("maxlength", 15);
-      textField.setAttribute("name", "group_member[member_name" + memberId + "]");
-      textField.setAttribute("id", "group_member_member_name" + memberId );
-      newMemberDiv.appendChild(textField);
+      // Append to members container
+      membersContainer.appendChild(memberElement);
+      inputText.value = '';
 
-      var groupIdField = document.createElement("input");
-      groupIdField.setAttribute("type", "hidden");
-      groupIdField.setAttribute("name", "group_member[group_id]");
-      groupIdField.setAttribute("id", "group_member_group_id");
-      groupIdField.setAttribute("value", "<%= @group_id %>");
-      newMemberDiv.appendChild(groupIdField);
-
-      membersDiv.appendChild(newMemberDiv);
-
-      memberId++;
+      // Add remove button functionality
+      memberElement.querySelector('.remove-member').addEventListener('click', () => {
+        membersContainer.removeChild(memberElement);
+      });
     });
-    }
   });
 </script>

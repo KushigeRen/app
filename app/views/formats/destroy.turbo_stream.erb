@@ -1,4 +1,7 @@
 <% if @member.errors.size == 0 %>
     <%= turbo_stream.remove @member %>
 <% end %>
+<%= turbo_stream.replace "member_select" do %>
+    <%= render partial: "formats/member_select",locals: { members: @members } %>
+<% end %>
 <%= turbo_stream_flash %>

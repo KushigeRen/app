@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "member_select" do %>
+    <%= search_form_for(@search, url: group_show_path(token: @group.token), html: { data: {
+            turbo_frame: "payment",
+            controller: "form",
+            action: "input->form#submit"
+        }}) do |f| %>
+        <%= f.select :creditor_member_member_name_eq,options_for_select([["選択したメンバーの明細だけを表示できます。", ""]] + members.map { |member| [member.member_name, member.member_name] }, @search.creditor_member_member_name_eq),{}, { class: "form-select" } %>
+    <% end %>
+<% end %>

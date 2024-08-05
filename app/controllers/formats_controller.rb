@@ -1,10 +1,13 @@
 class FormatsController < ApplicationController
 
   @@member_name = []
+  @@member_name_keys = []
+  @@members = []
 
   def index
     @formats = Group.includes(:members)
     @format = GroupMember.new
+    @@members.clear
     # 新規作成するグループのIDを採番
     if Group.count == 0
       @group_id = 1
@@ -26,7 +29,7 @@ class FormatsController < ApplicationController
   # --- グループとメンバーを作成する ---
   def create
     set_member_name
-    GroupMember.create_member_accessors(get_member_name.count)
+    GroupMember.create_member_accessors(@@member_name_keys)
     @format = GroupMember.new(format_params)
     if @format.save(get_member_name)
       @group = Group.find(@format.group_id)
@@ -106,9 +109,9 @@ class FormatsController < ApplicationController
   # クラス変数（配列）にmember_name(連番)のパラメータの値を格納
   def set_member_name
     @@member_name.clear
-    member_name_key = params[:group_member].keys.select { |key| key.to_s.start_with?("member_name") }
-    member_name_key.each do |name|
-        @@member_name << params[:group_member][name]
+    @@member_name_keys = params[:group_member].keys.select { |key| key.to_s.start_with?("member_name") }
+    @@member_name_keys.each do |name|
+      @@member_name << params[:group_member][name]
     end
   end
 
