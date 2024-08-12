@@ -1,10 +1,11 @@
-    <div class="container">
-        <div class="text-center mt-3">
-            <%= turbo_frame_tag @group do %>
-                <%= render partial: "formats/group", locals: { group: @group } %>
-            <% end %>
-        </div>
-        <p class="mt-3 mb-0">メンバー
+<div class="wrap">
+    <header class="bg- p-3 text-center">
+        <%= turbo_frame_tag @group do %>
+            <%= render partial: "formats/group", locals: { group: @group } %>
+        <% end %>
+    </header>
+    <div class="content px-3">
+        <p class="pt-3 mb-0">メンバー
             <span>
                 <%= link_to add_member_format_path(id: @group.group_id), data: { turbo_frame: "modal"} do %>
                     <i class="bi bi-plus-circle"></i>
@@ -40,21 +41,25 @@
             <% end %>
         </div>
         <div>
-            <button id="copy_url_button" class="btn btn-sm btn-outline-dark mt-3">URLをコピー</button>
+            <button id="copy_url_button" class="btn btn-sm btn-outline-dark mt-3 mb-3">URLをコピー</button>
         </div>
     </div>
-    <script>
-        // URLコピー
-        var copyButton = document.getElementById('copy_url_button')
+    <footer class="fw-light fs-6 p-3" style="width: 390px">
+            <p class="m-0">©︎2024 Wawawa</p>
+    </footer>
+</div>
+<script>
+    // URLコピー
+    var copyButton = document.getElementById('copy_url_button')
 
-        copyButton.addEventListener('click', function(){
-            var currentUrl = window.location.href;
+    copyButton.addEventListener('click', function(){
+        var currentUrl = window.location.href;
 
-            navigator.clipboard.writeText(currentUrl).then(function(){
-                alert('URLがクリップボードにコピーされました');
-            }).catch(function(err){
-                console.error('URLのコピーに失敗しました:',err);
-            });
+        navigator.clipboard.writeText(currentUrl).then(function(){
+            alert('URLがクリップボードにコピーされました');
+        }).catch(function(err){
+            console.error('URLのコピーに失敗しました:',err);
         });
-    </script>
+    });
+</script>
 

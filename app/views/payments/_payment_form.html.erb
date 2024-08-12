@@ -12,7 +12,7 @@
         </div>
         <div class="mb-3">
             <div class="amount">
-                <%= form.number_field :amount %>
+                <%= form.number_field :amount, max: 999999, min: 0 %>
             </div>
         </div>
         <div class="mb-3">

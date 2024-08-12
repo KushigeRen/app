@@ -1,12 +1,8 @@
 <%= turbo_frame_tag group do %>
-    <div class="group_name">
-        <p class="fw-bold">
-            <%= group.group_name %>
-            <span>
-                <%= link_to edit_group_format_path(id: @group.group_id), data: { turbo_frame: "modal" } do %>
-                    <i class="bi bi-pen"></i>
-                <% end %>
-            </span>
-        </p>
-    </div>
+    <%= group.group_name %>
+    <span>
+        <%= link_to edit_group_format_path(id: @group.group_id), data: { turbo_frame: "modal" } do %>
+            <i class="bi bi-pen"></i>
+        <% end %>
+    </span>
 <% end %>
