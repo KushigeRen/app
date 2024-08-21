@@ -3,8 +3,8 @@
 <% end %>
 <%= turbo_stream.update Member.new, "" %>
 <%= turbo_stream.replace "member_select" do %>
-    <% get_members_info(@member) %>
-    <% get_search_info(@member) %>
-    <%= render partial: "formats/member_select",locals: { members: @members } %>
+    <% members = get_members_info(@member) %>
+    <% @search = get_search_info(@member) %>
+    <%= render partial: "formats/member_select",locals: { members: members } %>
 <% end %>
 <%= turbo_stream_flash %>

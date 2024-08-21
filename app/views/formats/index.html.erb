@@ -7,7 +7,6 @@
     <div class="group">
       <%= form.text_field :group_name, maxlength: 15, label: "グループ名" %>
     </div>
-    <input type="hidden" id="group_id" name="group_id" value="<%= @group_id %>">
     <div class="no-required-style">
       <label class="mb-2">メンバー名</label>
       <div class="d-flex mb-0">
@@ -41,7 +40,6 @@
       memberElement.classList.add('member');
       memberElement.innerHTML = `
         <input value="${memberName}" type="hidden" name="group_member[member_name${memberNumber}]" id="group_member_member_name${memberNumber}">
-        <input value="<%=@group_id%>" autocomplete="off" type="hidden" name="group_member[group_id]" id="group_member_group_id">
         <span class="box me-2 mt-3">${memberName}<button type="button" class="remove-member btn btn-light btn-sm ms-1"><i class="bi bi-x"></i></button></span>
       `;
 
