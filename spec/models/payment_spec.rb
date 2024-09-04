@@ -1,25 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe Payment, type: :model do
-  it "債権者ID、債務者ID、金額があれば有効であること" do
-    Group.create(
+  before do
+    @group = Group.create(
       group_id: 1,
       group_name: "test_group",
     )
 
-    creditor = Member.create(
-      group_id: 1,
+    @creditor = Member.create(
+      group_id: @group.id,
       member_name: "creditor",
     )
 
-    debtor = Member.create(
-      group_id: 1,
+    @debtor = Member.create(
+      group_id: @group.id,
       member_name: "debtor",
     )
+  end
 
+  it "債権者ID、債務者ID、金額があれば有効であること" do
     payment = Payment.new(
-      creditor_member_id: creditor.id,
-      debtor_member_id: debtor.id,
+      creditor_member_id: @creditor.id,
+      debtor_member_id: @debtor.id,
       amount: 3000,
     )
     expect(payment).to be_valid

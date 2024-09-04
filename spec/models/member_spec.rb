@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Member, type: :model do
-  it "メンバー名,グループIDがあれば有効な状態であること" do
-    Group.create(
+  before do
+    @group = Group.create(
       group_id: 1,
       group_name: "group",
     )
+  end
 
+  it "メンバー名,グループIDがあれば有効な状態であること" do
     member = Member.new(
-      group_id: 1,
+      group_id: @group.id,
       member_name: "member",
     )
     expect(member).to be_valid
