@@ -1,7 +1,7 @@
 <%= turbo_frame_tag @member do %>
     <%= bootstrap_form_with(model: @member, url: format_path, local: true, data: { action: "turbo:submit-end->modal#close" }, method: :put) do |form| %>
         <div class="member">
-            <%= form.text_field :member_name, maxlength: 6, value: @member.member_name %>
+            <%= form.text_field :member_name, maxlength: 8, value: @member.member_name %>
             <%= form.hidden_field :member_id, value: @member.member_id %>
             <%= form.hidden_field :group_id, value: @group.group_id %>
         </div>

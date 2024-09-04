@@ -6,12 +6,15 @@ class Payment < ApplicationRecord
   validates :creditor_member_id, presence: true
   validates :debtor_member_id, presence: true
   validates :amount, presence: true
+  validates :amount, numericality: { in: 0..999999 }
 
-  def self.ransackable_attributes(auth_object: nil)
+  # rubocop:disable Airbnb/OptArgParameters
+  def self.ransackable_attributes(auth_object = nil)
     ["creditor_member_id", "debtor_member_id"]
   end
 
-  def self.ransackable_associations(auth_object: nil)
+  def self.ransackable_associations(auth_object = nil)
     ["creditor_member", "debtor_member"]
   end
+  # rubocop:enable Airbnb/OptArgParameters
 end
