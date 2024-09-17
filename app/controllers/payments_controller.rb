@@ -9,12 +9,12 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = Payment.new(payment_params)
-    @group = Group.find_by(group_id: @payment.group_id)
+    @group = Group.find(@payment.group_id)
     @members = Member.where(group_id: @group.group_id)
-    @creditor_member = Member.new
-    @debtor_member = Member.new
+    @payments = Payment.where(group_id: @group.group_id)
     if @payment.save
       flash.now.notice = "支払い明細を作成しました"
+      @search = @payments.ransack(params[:q])
     else
       render 'new', status: :unprocessable_entity
     end

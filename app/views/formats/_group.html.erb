@@ -2,7 +2,7 @@
     <%= group.group_name %>
     <span>
         <%= link_to edit_group_format_path(id: @group.group_id), data: { turbo_frame: "modal" } do %>
-            <i class="bi bi-pen"></i>
+            <i class="bi bi-pen edit-group"></i>
         <% end %>
     </span>
 <% end %>

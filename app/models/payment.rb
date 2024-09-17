@@ -2,7 +2,7 @@ class Payment < ApplicationRecord
   # belongs_to :member, foreign_key: 'creditor_member_id', optional: true
   belongs_to :creditor_member, class_name: 'Member'
   belongs_to :debtor_member, class_name: 'Member'
-  belongs_to :group,optional: true
+  belongs_to :group, optional: true
 
   validates :creditor_member_id, presence: true
   validates :debtor_member_id, presence: true

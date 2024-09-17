@@ -7,8 +7,8 @@ RSpec.describe Payment, type: :model do
   it "債権者ID、債務者ID、金額、支払い日、メモがあれば有効であること" do
     expect(FactoryBot.build(
       :payment, creditor_member_id: payment.creditor_member_id,
-      debtor_member_id: payment.debtor_member_id,
-      group: group
+                debtor_member_id: payment.debtor_member_id,
+                group: group
     )).to be_valid
   end
 

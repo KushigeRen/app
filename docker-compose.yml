@@ -18,11 +18,18 @@ services:
     tty: true
     depends_on:
       - db
+      - selenium_chrome
     environment:
       DATABASE_PASSWORD: pass
     ports:
       - "3000:3000"
     volumes:
       - .:/app
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
+    ports:
+      - 4444:4444
 volumes:
   db_storage:
