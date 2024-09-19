@@ -81,3 +81,10 @@ header, footer {
   grid-template-columns: 100%;
   min-height: 100vh;
 }
+
+@media (max-width: 600px) {
+  .full-width {
+    width: 100%;
+  }
+}
+
