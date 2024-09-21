@@ -10,8 +10,7 @@ class Payment < ApplicationRecord
   validates :amount, numericality: { in: 0..999999 }
   validates :group_id, presence: true
   validates :payment_date, presence: true
-  validates :description, presence: true
-  validates :description, length: { in: 1..30 }
+  validates :description, length: { in: 0..30 }
 
   # rubocop:disable Airbnb/OptArgParameters
   def self.ransackable_attributes(auth_object = nil)
