@@ -82,9 +82,8 @@ header, footer {
   min-height: 100vh;
 }
 
-@media (max-width: 600px) {
-  .full-width {
-    width: 100%;
+@media screen and (min-width: 600px) {
+	.cover-all{
+    width: 600px;
   }
 }
-

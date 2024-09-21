@@ -10,9 +10,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
   <body>
-    <div class="mx-auto full-width" style="width: 600px">
-      <%= yield %>
-    </div>
+    <%= yield %>
     <%= turbo_frame_tag "modal" %>
     <div id="flashes" class="position-fixed top-0 end-0" style="margin: 0.75rem"></div>
   </body>
