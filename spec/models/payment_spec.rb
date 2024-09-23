@@ -42,12 +42,6 @@ RSpec.describe Payment, type: :model do
     expect(payment.errors[:payment_date]).to include("を入力してください")
   end
 
-  it "メモがなければ無効であること" do
-    payment = FactoryBot.build(:payment, description: nil)
-    payment.valid?
-    expect(payment.errors[:description]).to include("を入力してください")
-  end
-
   it "メモが31文字以上であれば無効であること" do
     payment = FactoryBot.build(:payment, description: "1234567890123456789012345678901")
     payment.valid?

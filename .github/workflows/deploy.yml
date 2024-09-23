@@ -5,14 +5,34 @@ on:
       - main
 
 jobs:
-  build:
+  Rspec & Rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby 2.6.7
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.7
+        env:
+          RAILA_ENV: test
+        run: |
+          sudo apt-get -yqq install libsqlite3-dev
+          bundle install
+          bin/rails db:create
+          bin/rails db:migrate
+          bin/yarn install
+          bundle exec rubocop --require rubocop-airbnb
+          bundle exec rspec
+
+jobs:
+  Deploy to Heroku:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Login to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
