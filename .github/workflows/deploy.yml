@@ -38,11 +38,13 @@ jobs:
       - name: Set Rails_ENV
         run: echo "RAILS_ENV=test" >> $GITHUB_ENV
 
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
       - name: Install Yarn
-        run: |
-          sudo apt-get install -y curl
-          curl -o- -L https://yarnpkg.com/install.sh | bash
-          echo "$HOME/.yarn/bin" >> $GITHUB_PATH
+        run: npm install --global yarn
 
       - name: Install Dependencies
         run: |
@@ -51,7 +53,7 @@ jobs:
           bin/rails db:drop
           bin/rails db:create
           bin/rails db:migrate
-          bin/yarn install
+          yarn install
 
       - name: Run Rubocop
         run: bundle exec rubocop --require rubocop-airbnb
