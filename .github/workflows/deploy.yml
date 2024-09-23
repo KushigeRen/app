@@ -7,63 +7,21 @@ on:
 jobs:
   rspec_and_rubocop:
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:5.7
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: app_test
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
-    env:
-      DATABASE_PASSWORD: root
-      DATABASE_USER: root
-      DATABASE_HOST: 127.0.0.1
-      RAILS_ENV: test
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Ruby 3.1.4
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1.4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: Set Rails_ENV
-        run: echo "RAILS_ENV=test" >> $GITHUB_ENV
-
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
-
-      - name: Install Yarn
-        run: npm install --global yarn
-
-      - name: Install Dependencies
-        run: |
-          sudo apt-get -yqq install libsqlite3-dev
-          bundle install
-          bin/rails db:drop
-          bin/rails db:create
-          bin/rails db:migrate
-          yarn install
-
-      - name: Precompile Assets
-        run: |
-          RAILS_ENV=test bundle exec rails assets:precompile
-
-      - name: Run Rubocop
-        run: bundle exec rubocop --require rubocop-airbnb
+      - name: Build and run services
+        run: docker-compose up --build -d
 
       - name: Run RSpec
-        run: bundle exec rspec
+        run: docker-compose exec web bundle exec rspec
+
+      - name: Run Rubocop
+        run: docker-compose exec web bundle exec rubocop --require rubocop-airbnb
 
   deploy_to_heroku:
     runs-on: ubuntu-latest
