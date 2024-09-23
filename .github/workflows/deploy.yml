@@ -55,6 +55,10 @@ jobs:
           bin/rails db:migrate
           yarn install
 
+      - name: Precompile Assets
+        run: |
+          RAILS_ENV=test bundle exec rails assets:precompile
+
       - name: Run Rubocop
         run: bundle exec rubocop --require rubocop-airbnb
 
