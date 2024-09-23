@@ -10,6 +10,11 @@ services:
       - "3306:3306"
     volumes:
       - db_storage:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
   web:
     container_name: web
     build: .
