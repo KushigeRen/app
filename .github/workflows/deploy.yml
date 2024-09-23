@@ -47,6 +47,14 @@ jobs:
           bin/rails db:migrate
           bin/yarn install
 
+      - name: Install Yarn
+        run: |
+          npm install --global yarn
+
+      - name: Install JavaScript Dependencies
+        run: |
+          bin/yarn install
+
       - name: Run Rubocop
         run: bundle exec rubocop --require rubocop-airbnb
 
