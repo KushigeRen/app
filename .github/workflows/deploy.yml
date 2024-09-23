@@ -7,6 +7,8 @@ on:
 jobs:
   rspec_and_rubocop:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
 
