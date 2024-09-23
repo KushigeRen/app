@@ -16,8 +16,7 @@ jobs:
           ruby-version: 2.6.7
 
       - name: Set Rails_ENV
-        env:
-          RAILS_ENV: test
+        run: echo "RAILS_ENV=test" >> $GITHUB_ENV
 
       - name: Install Dependencies
         run: |
@@ -28,10 +27,10 @@ jobs:
           bin/yarn install
 
       - name: Run Rubocop
-          bundle exec rubocop --require rubocop-airbnb
+        run: bundle exec rubocop --require rubocop-airbnb
 
       - name: Run RSpec
-          bundle exec rspec
+        run: bundle exec rspec
 
   deploy_to_heroku:
     runs-on: ubuntu-latest
