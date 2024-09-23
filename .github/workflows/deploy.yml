@@ -9,19 +9,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Ruby 2.6.7
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6.7
+
+      - name: Set Rails_ENV
         env:
           RAILS_ENV: test
+
+      - name: Install Dependencies
         run: |
           sudo apt-get -yqq install libsqlite3-dev
           bundle install
           bin/rails db:create
           bin/rails db:migrate
           bin/yarn install
+
+      - name: Run Rubocop
           bundle exec rubocop --require rubocop-airbnb
+
+      - name: Run RSpec
           bundle exec rspec
 
   deploy_to_heroku:
