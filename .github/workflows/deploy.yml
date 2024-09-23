@@ -42,6 +42,7 @@ jobs:
         run: |
           sudo apt-get -yqq install libsqlite3-dev
           bundle install
+          bin/rails db:drop
           bin/rails db:create
           bin/rails db:migrate
           bin/yarn install
