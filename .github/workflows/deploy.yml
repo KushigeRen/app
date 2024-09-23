@@ -23,10 +23,10 @@ jobs:
         run: docker-compose up --build -d
 
       - name: Run RSpec
-        run: docker-compose -T exec web bundle exec rspec
+        run: docker-compose exec -T web bundle exec rspec
 
       - name: Run Rubocop
-        run: docker-compose -T exec web bundle exec rubocop --require rubocop-airbnb
+        run: docker-compose exec -T web bundle exec rubocop --require rubocop-airbnb
 
   deploy_to_heroku:
     runs-on: ubuntu-latest
