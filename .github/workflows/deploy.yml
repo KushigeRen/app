@@ -38,6 +38,12 @@ jobs:
       - name: Set Rails_ENV
         run: echo "RAILS_ENV=test" >> $GITHUB_ENV
 
+      - name: Install Yarn
+        run: |
+          sudo apt-get install -y curl
+          curl -o- -L https://yarnpkg.com/install.sh | bash
+          echo "$HOME/.yarn/bin" >> $GITHUB_PATH
+
       - name: Install Dependencies
         run: |
           sudo apt-get -yqq install libsqlite3-dev
@@ -45,14 +51,6 @@ jobs:
           bin/rails db:drop
           bin/rails db:create
           bin/rails db:migrate
-          bin/yarn install
-
-      - name: Install Yarn
-        run: |
-          npm install --global yarn
-
-      - name: Install JavaScript Dependencies
-        run: |
           bin/yarn install
 
       - name: Run Rubocop
