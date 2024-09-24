@@ -38,6 +38,7 @@ RSpec.describe "Payments", type: :system do
     find('i.bi.bi-plus-circle.add-member').click
     fill_in "member_member_name", with: "user1"
     click_button "登録する"
+    expect(page).to have_content "メンバー情報を登録しました。"
 
     find('i.bi.bi-plus-circle.new-payment').click
     select "user1", from: "payment[creditor_member_id]"
@@ -45,6 +46,7 @@ RSpec.describe "Payments", type: :system do
     fill_in "payment_amount", with: 9999
     fill_in "payment_description", with: "test"
     click_button "登録する"
+    expect(page).to have_content "支払い明細を作成しました"
 
     select "user1", from: "q[creditor_member_member_name_eq]"
     page.execute_script("document.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true }))")
