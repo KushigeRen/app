@@ -25,6 +25,11 @@ jobs:
       - name: Wait for MySQL
         run: docker-compose exec -T db bash -c 'until mysqladmin ping -h "db" --silent; do sleep 1; done'
 
+      - name: Create test database
+        run: docker-compose exec -T web bundle exec rails db:create RAILS_ENV=test
+
+      - name: Run migrations
+        run: docker-compose exec -T web bundle exec rails db:migrate RAILS_ENV=test
 
       - name: Run RSpec
         run: docker-compose exec -T web bundle exec rspec
