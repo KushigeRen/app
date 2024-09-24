@@ -8,7 +8,7 @@ PCから開いた場合、横幅は600px固定で表示されます。
 https://tatekae-record-e17f77fb7e74.herokuapp.com/
 
 ーQRー  
-<img src="{https://github.com/user-attachments/assets/7f410e12-62c4-4b91-8111-5e1d360114f2}" width="50%" />　　
+<img src="https://github.com/user-attachments/assets/7f410e12-62c4-4b91-8111-5e1d360114f2" width="10%" />　　
 
 Things you may want to cover:
 
