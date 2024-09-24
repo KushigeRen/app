@@ -35,21 +35,20 @@ RSpec.describe "Payments", type: :system do
   end
 
   scenario "支払い明細を絞り込み検索できること", js: true do
-    find('i.bi.bi-plus-circle.add-member').click
-    fill_in "member_member_name", with: "user1"
-    click_button "登録する"
-    expect(page).to have_content "メンバー情報を登録しました。"
-
     find('i.bi.bi-plus-circle.new-payment').click
-    select "user1", from: "payment[creditor_member_id]"
-    select @members[0].member_name, from: "payment[debtor_member_id]"
+    select @members[0].member_name, from: "payment[creditor_member_id]"
+    select @members[1].member_name, from: "payment[debtor_member_id]"
     fill_in "payment_amount", with: 9999
     fill_in "payment_description", with: "test"
     click_button "登録する"
     expect(page).to have_content "支払い明細を作成しました"
 
-    select "user1", from: "q[creditor_member_member_name_eq]"
+    select @members[0].member_name, from: "q[creditor_member_member_name_eq]"
     page.execute_script("document.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true }))")
     expect(page).to have_selector('#creditor_member', count: 1)
+
+    select @members[1].member_name, from: "q[creditor_member_member_name_eq]"
+    page.execute_script("document.querySelector('form').dispatchEvent(new Event('submit', { bubbles: true }))")
+    expect(page).to have_selector('#creditor_member', count: 0)
   end
 end

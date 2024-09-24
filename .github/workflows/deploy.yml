@@ -37,13 +37,6 @@ jobs:
       - name: Run RSpec
         run: docker-compose exec -T web bundle exec rspec
 
-      - name: Upload RSpec failure screenshots
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: rspec-failures
-          path: ./app/tmp/capybara/
-
       - name: Run Rubocop
         run: docker-compose exec -T web bundle exec rubocop --require rubocop-airbnb
 
