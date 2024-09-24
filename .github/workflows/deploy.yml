@@ -31,6 +31,9 @@ jobs:
       - name: Run migrations
         run: docker-compose exec -T web bundle exec rails db:migrate RAILS_ENV=test
 
+      - name: Install Node.js dependencies
+        run: docker-compose exec -T web yarn install
+
       - name: Run RSpec
         run: docker-compose exec -T web bundle exec rspec
 
