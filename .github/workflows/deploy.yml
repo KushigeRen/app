@@ -23,7 +23,8 @@ jobs:
         run: docker-compose up --build -d
 
       - name: Wait for MySQL
-        run: docker-compose exec -T web bash -c 'until nc -z db 3306; do sleep 1; done'
+        run: docker-compose exec -T db bash -c 'until mysqladmin ping -h "db" --silent; do sleep 1; done'
+
 
       - name: Run RSpec
         run: docker-compose exec -T web bundle exec rspec
