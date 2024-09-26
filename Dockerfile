@@ -11,5 +11,6 @@ ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 ADD . /app
+RUN bundle exec rails assets:precompile
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
 
