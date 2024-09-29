@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/formats/register', to: 'formats#member_register', as: 'member_register'
   root 'formats#index'
   resources :payments, only: [:create, :edit, :update, :destroy]
+  delete 'destroy_selected', to: 'payments#destroy_selected', as: :delete_payments
   resources :formats do
     member do
       get 'edit_group'

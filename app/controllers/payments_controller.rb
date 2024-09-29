@@ -43,9 +43,24 @@ class PaymentsController < ApplicationController
 
   def destroy
     @payment = Payment.find(params[:id])
-    @group = Group.find_by(group_id: @payment.group_id)
     if @payment.destroy
       flash.now.notice = "支払いが完了しました"
+    end
+  end
+
+  def destroy_selected
+    @target_payments = Payment.where(payment_id: params[:payment_ids])
+    @present_flag = @target_payments.present?
+    if params[:payment_ids]
+      @payments = Payment.where(group_id: @target_payments[0].group_id).where.not(payment_id: @target_payments.pluck(:payment_id))
+      @group = Group.find_by(group_id: @target_payments[0].group_id)
+      @members = Member.where(group_id: @group.group_id)
+      @search = @payments.ransack(params[:q])
+      if @target_payments.destroy_all
+        flash.now.notice = "選択された支払いを完了しました。"
+      end
+    else
+      flash.now.alert = "完了する支払いを選択してください。"
     end
   end
 

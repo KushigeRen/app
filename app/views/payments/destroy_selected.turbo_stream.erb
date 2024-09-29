@@ -1,0 +1,7 @@
+<% if @present_flag %>
+    <%= turbo_stream.remove @target_payments %>
+    <%= turbo_stream.replace "payments_section" do %>
+        <%= render partial: "payments/payments_section" %>
+    <% end %>
+<% end %>
+<%= turbo_stream_flash %>

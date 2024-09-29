@@ -5,7 +5,10 @@
         <% end %>
     </header>
     <div class="content px-3">
-        <p class="pt-3 mb-0">メンバー
+        <div class="d-flex justify-content-end mt-2">
+            <button id="copy_url_button" class="btn btn-sm btn-outline-dark">URLをコピー</button>
+        </div>
+        <p class="m-0">メンバー
             <span>
                 <%= link_to add_member_format_path(id: @group.group_id), data: { turbo_frame: "modal"} do %>
                     <i class="bi bi-plus-circle add-member"></i>
@@ -34,16 +37,18 @@
                     <%= f.select :creditor_member_member_name_eq,options_for_select([["選択したメンバーの明細だけを表示できます。", ""]] + @members.map { |member| [member.member_name, member.member_name] }, @search.creditor_member_member_name_eq),{}, { class: "form-select" } %>
                 <% end %>
             <% end %>
-            <div id="payments" class="mt-3">
-                <%= turbo_frame_tag "payment" do %>
-                    <% @payments.each do |payment| %>
-                        <%= render partial: "payments/payment", locals: { payment: payment } %>
+            <%= form_with url: delete_payments_path, method: :delete, data: { turbo_confirm: "選択した支払いを完了しますか？" } do %>
+                <div id="payments" class="mt-3">
+                    <%= turbo_frame_tag "payment" do %>
+                        <% @payments.each do |payment| %>
+                            <%= render partial: "payments/payment", locals: { payment: payment } %>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </div>
-        </div>
-        <div>
-            <button id="copy_url_button" class="btn btn-sm btn-outline-dark mt-3 mb-3">URLをコピー</button>
+                </div>
+                <div class="mt-3">
+                    <%= submit_tag "まとめて完了", class: "btn btn-sm btn-outline-success" %>
+                </div>
+            <% end %>
         </div>
     </div>
     <footer class="fw-light fs-6 p-3">

@@ -33,4 +33,4 @@ https://tatekae-record-e17f77fb7e74.herokuapp.com/
 
 # Github Actions  
 Githubへのpush時に、RspecとRubocopが自動で実行されます。  
-masterブランチへのpushでは、RspecとRubocopが成功した場合、EC2への自動デプロイが実行されます.
+masterブランチへのpushでは、RspecとRubocopが成功した場合、Herokuへの自動デプロイが実行されます.
