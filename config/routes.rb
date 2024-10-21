@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/payments/:token/new', to: 'payments#new', as: 'payments_new'
+  post "/create_event", to: "calendars#create_event"
+  get "/oauth2callback", to: "calendars#handle_oauth_callback"
+  # get "/oauth2callback", to: "calendars#create_event"
   get '/group/:token', to: 'formats#show', as: 'group_show'
   post '/formats/register', to: 'formats#member_register', as: 'member_register'
   root 'formats#index'

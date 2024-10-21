@@ -31,3 +31,54 @@
         </div>
     <% end %>
 <% end %>
+
+<div class="form-group mt-5">
+    <form id="authForm" method="post">
+        <input type=date name="deadline" id="deadline" required>
+        <input type=hidden name="dst_amount" id="dst_amount" value="">
+        <input type=hidden name="dst_description" id="dst_description" value="">
+        <input type=hidden id="token" value=<%=@group.token%>>
+        <input type=hidden id="client_id" value=<%=@client_id%>>
+        <input type=hidden id="redirect_url" value=<%=@redirect_url%>>
+        <input type=hidden id="scope" value=<%=@scope%>>
+        <input type="submit" class="btn btn-primary mt-2" value="Googleカレンダーにイベントを作成">
+    </form>
+</div>
+
+<script>
+    document.addEventListener("turbo:frame-load",function(){
+        const form = document.getElementById("authForm");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            // フォームの入力データを取得
+            const srcAmount = document.getElementById("payment_amount");
+            const dstAmount = document.getElementById("dst_amount");
+            dstAmount.value = srcAmount.value;
+
+            const srcDescription = document.getElementById("payment_description");
+            const dstDescription = document.getElementById("dst_description");
+            dstDescription.value = srcDescription.value;
+
+            srcAmount.addEventListener("input", function() {
+                dstAmount.value = srcAmount.value;
+            });
+            srcDescription.addEventListener("input", function() {
+                dstDescription.value = srcDescription.value;
+            });
+
+            const deadline = document.getElementById("deadline").value;
+            const token = document.getElementById("token").value
+
+            // Google認証URLにデータをクエリパラメータとして追加
+            const client_id = document.getElementById("client_id").value
+            const redirect_url = document.getElementById("redirect_url").value
+            const scope = document.getElementById("scope").value
+            const authUrl = `https://accounts.google.com/o/oauth2/auth?access_type=offline&approval_prompt=force&client_id=${client_id}&include_granted_scopes=true&redirect_uri=${redirect_url}&response_type=code&scope=${scope}&state=${dstAmount.value},${dstDescription.value},${deadline},${token}`;
+
+            // Googleの認証URLへリダイレクト
+            window.location.href = authUrl;
+        });
+    });
+</script>
+

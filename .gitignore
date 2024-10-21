@@ -34,3 +34,12 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+# GoogleCalendarAPIKey
+/neat-planet-347015-f7bb689fc966.json
+/localhost.crt
+/localhost.key
+/localhost.csr
+/.env
+/token.yml
+/google_calendar_credentials.json

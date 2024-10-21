@@ -1,8 +1,10 @@
 name: Deploy to Heroku
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - closed
 
 jobs:
   rspec_and_rubocop:
