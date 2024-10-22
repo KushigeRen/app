@@ -19,7 +19,8 @@ RSpec.describe "Payments", type: :system do
   end
 
   scenario "支払い明細を編集できること", js: true do
-    find('i.bi.bi-pen.edit-payment').click
+    find('i.bi.bi-three-dots-vertical').click
+    find('.dropdown-item.edit').click
     select @members[0].member_name, from: "payment[creditor_member_id]"
     select @members[1].member_name, from: "payment[debtor_member_id]"
     fill_in "payment_description", with: "edited"
