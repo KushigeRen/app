@@ -16,9 +16,21 @@
             ¥<%= number_with_delimiter(payment.amount) %>
         </div>
         <div class="col-1">
-            <%= link_to edit_payment_path(id: payment.payment_id), class: "edit", data: { turbo_frame: "modal" } do %>
-                <i class="bi bi-pen edit-payment"></i>
-            <% end %>
+            <div class="dropdown">
+                <i class="bi bi-three-dots-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu">
+                    <li>
+                        <%= link_to edit_payment_path(id: payment.payment_id), class: "dropdown-item edit", data: { turbo_frame: "modal" } do %>
+                            編集
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to create_event_path(id: payment.payment_id), class: "dropdown-item create-event", data: { turbo_frame: "modal" } do %>
+                            Googleカレンダーに登録
+                        <% end %>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="col-1">
             <%= link_to payment_path(id: payment.payment_id), data: { turbo_method: :delete, turbo_confirm: "支払いを完了します。"} do %>
