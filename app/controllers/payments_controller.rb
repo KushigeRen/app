@@ -26,11 +26,6 @@ class PaymentsController < ApplicationController
     @members = Member.where(group_id: @group.group_id)
     @creditor_member = Member.find_by(member_id: @payment.creditor_member_id)
     @debtor_member = Member.find_by(member_id: @payment.debtor_member_id)
-
-    # GoogleCalendarAPI用の環境変数取得
-    @client_id = Google::Auth::ClientId.from_file(ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH')).id
-    @redirect_url = ENV.fetch('GOOGLE_CALENDAR_REDIRECT_URI')
-    @scope = Google::Apis::CalendarV3::AUTH_CALENDAR
   end
 
   def update
@@ -68,6 +63,7 @@ class PaymentsController < ApplicationController
       flash.now.alert = "完了する支払いを選択してください。"
     end
   end
+
 
   private
 
