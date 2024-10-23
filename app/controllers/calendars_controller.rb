@@ -32,7 +32,16 @@ class CalendarsController < ApplicationController
     @calendar.client_options.application_name = ENV.fetch('GOOGLE_CALENDAR_APPLICATION_NAME')
     @calendar_id = 'primary'
 
-    client_id = Google::Auth::ClientId.from_file(ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH'))
+
+    if Rails.env.production?
+      # 本番環境 (Heroku) では、環境変数からファイル内容を取得し、一時ファイルに書き出す
+      google_calendar_credentials = ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH')
+      File.write('tmp/credentials.json', google_calendar_credentials)
+      client_id = Google::Auth::ClientId.from_file('tmp/credentials.json')
+    else
+      # 開発環境では、ファイルパスから直接読み込む
+      client_id = Google::Auth::ClientId.from_file(ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH'))
+    end
     token_store = Google::Auth::Stores::FileTokenStore.new(file: ENV.fetch('GOOGLE_CALENDAR_TOKEN_PATH'))
     authorizer = Google::Auth::UserAuthorizer.new(client_id, Google::Apis::CalendarV3::AUTH_CALENDAR, token_store)
 
