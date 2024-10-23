@@ -6,6 +6,7 @@ class CalendarsController < ApplicationController
   def create_event
     @payment = Payment.find(params[:id])
     @group = Group.find(@payment.group_id)
+    binding.pry
 
     # GoogleCalendarAPI用の環境変数取得
     if Rails.env.production?
