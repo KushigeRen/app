@@ -6,9 +6,20 @@ class CalendarsController < ApplicationController
   def create_event
     @payment = Payment.find(params[:id])
     @group = Group.find(@payment.group_id)
+    binding.pry
 
     # GoogleCalendarAPI用の環境変数取得
-    @client_id = Google::Auth::ClientId.from_file(ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH')).id
+    # @client_id = Google::Auth::ClientId.from_file(ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH')).id
+    if Rails.env.production?
+      # 本番環境 (Heroku) では、環境変数からファイル内容を取得し、一時ファイルに書き出す
+      google_calendar_credentials = ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH')
+      File.write('tmp/credentials.json', google_calendar_credentials)
+      client_id = Google::Auth::ClientId.from_file('tmp/credentials.json').id
+    else
+      # 開発環境では、ファイルパスから直接読み込む
+      google_calendar_credentials = ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH')
+    end
+    
     @redirect_url = ENV.fetch('GOOGLE_CALENDAR_REDIRECT_URI')
     @scope = Google::Apis::CalendarV3::AUTH_CALENDAR
   end
