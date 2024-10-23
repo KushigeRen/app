@@ -32,7 +32,6 @@ class CalendarsController < ApplicationController
     @calendar.client_options.application_name = ENV.fetch('GOOGLE_CALENDAR_APPLICATION_NAME')
     @calendar_id = 'primary'
 
-
     if Rails.env.production?
       # 本番環境 (Heroku) では、環境変数からファイル内容を取得し、一時ファイルに書き出す
       google_calendar_credentials = ENV.fetch('GOOGLE_CALENDAR_SECRET_PATH')
