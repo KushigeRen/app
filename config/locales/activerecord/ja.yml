@@ -8,8 +8,8 @@ ja:
       member:
         member_name: 'メンバー名'
       payment:
-        creditor_member_id: '払ったメンバー'
-        debtor_member_id: '払われたメンバー'
+        creditor_member_id: '支払ったメンバー'
+        debtor_member_id: '支払われたメンバー'
         description: 'メモ'
         amount: '金額'
       group:
