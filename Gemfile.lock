@@ -96,6 +96,7 @@ GEM
       logger (~> 1.5)
     coderay (1.1.3)
     concurrent-ruby (1.2.3)
+    connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
@@ -110,6 +111,8 @@ GEM
       dotenv (= 3.1.4)
       railties (>= 6.1)
     erubi (1.12.0)
+    et-orbi (1.2.11)
+      tzinfo
     execjs (2.9.1)
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
@@ -123,6 +126,9 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.16.3)
+    fugit (1.11.1)
+      et-orbi (~> 1, >= 1.2.11)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     google-api-ruby-client (9001.0)
@@ -214,10 +220,9 @@ GEM
     public_suffix (6.0.1)
     puma (5.6.8)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.7.3)
     rack (2.2.9)
-    rack-cors (2.0.2)
-      rack (>= 2.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.8.1)
@@ -259,6 +264,8 @@ GEM
       i18n
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
+    redis-client (0.22.2)
+      connection_pool
     regexp_parser (2.9.0)
     reline (0.5.1)
       io-console (~> 0.5)
@@ -324,6 +331,8 @@ GEM
       rubocop (~> 1.61)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
+    rufus-scheduler (3.9.2)
+      fugit (~> 1.1, >= 1.11.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -337,6 +346,15 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sidekiq (7.3.4)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
+    sidekiq-scheduler (5.0.6)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 6, < 8)
+      tilt (>= 1.4.0, < 3)
     signet (0.19.0)
       addressable (~> 2.8)
       faraday (>= 0.17.5, < 3.a)
@@ -402,7 +420,6 @@ DEPENDENCIES
   mysql2 (~> 0.5)
   pry-byebug
   puma (~> 5.0)
-  rack-cors
   rails (~> 7.0.8, >= 7.0.8.1)
   rails-i18n
   ransack
@@ -410,6 +427,8 @@ DEPENDENCIES
   rubocop-airbnb
   sassc-rails
   selenium-webdriver
+  sidekiq
+  sidekiq-scheduler
   spring-commands-rspec
   sprockets-rails
   stimulus-rails

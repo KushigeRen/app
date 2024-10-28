@@ -14,3 +14,6 @@ ja:
         amount: '金額'
       group:
         group_name: 'グループ名'
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"

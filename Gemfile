@@ -87,3 +87,5 @@ gem "rails-i18n"
 gem 'google-api-ruby-client'
 gem 'google-apis-calendar_v3'
 gem 'googleauth'
+gem 'sidekiq'
+gem 'sidekiq-scheduler'

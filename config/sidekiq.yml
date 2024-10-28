@@ -1,0 +1,6 @@
+:concurrency: 5
+:scheduler:
+  :schedule:
+    delete_old_records:
+      cron: "30 21 * * *"
+      class: DeleteOldRecordsJob
