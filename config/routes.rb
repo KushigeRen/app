@@ -1,5 +1,3 @@
-require 'sidekiq/web'
-
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/payments/:token/new', to: 'payments#new', as: 'payments_new'
@@ -18,9 +16,4 @@ Rails.application.routes.draw do
       post 'create_member'
     end
   end
-
-  Sidekiq::Web.use(Rack::Auth::Basic) do |user_id, password|
-    [user_id, password] == [ENV.fetch('SIDEKIQ_USER'), ENV.fetch('SIDEKIQ_PASSWORD')]
-  end
-  mount Sidekiq::Web, at: '/sidekiq'
 end

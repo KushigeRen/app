@@ -24,7 +24,6 @@ services:
     depends_on:
       - db
       - selenium_chrome
-      - redis
     environment:
       DATABASE_PASSWORD: pass
     ports:
@@ -37,20 +36,5 @@ services:
       driver: none
     ports:
       - 4444:4444
-  redis:
-    container_name: redis
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-  sidekiq:
-    build: .
-    command: bundle exec sidekiq -C config/sidekiq.yml
-    environment:
-      DATABASE_PASSWORD: pass
-    depends_on:
-      - redis
 volumes:
   db_storage:
-  redis_data:
