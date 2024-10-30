@@ -2,5 +2,5 @@
 :scheduler:
   :schedule:
     delete_old_records:
-      cron: "00 22 * * *"
+      cron: "30 4 * * *"
       class: DeleteOldRecordsJob
