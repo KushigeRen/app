@@ -12,6 +12,4 @@ ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 ADD . /app
 RUN bundle exec rails assets:precompile
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
-CMD ["/app/start.sh"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
