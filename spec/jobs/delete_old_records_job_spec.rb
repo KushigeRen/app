@@ -12,9 +12,9 @@ RSpec.describe DeleteOldRecordsJob, type: :job do
     before { Sidekiq::Testing.fake! }
 
     it 'キューにジョブが追加されることを確認する' do
-      expect {
+      expect do
         DeleteOldRecordsJob.perform_async
-      }.to change(DeleteOldRecordsJob.jobs, :size).by(1)
+      end.to change(DeleteOldRecordsJob.jobs, :size).by(1)
     end
   end
 
@@ -22,9 +22,9 @@ RSpec.describe DeleteOldRecordsJob, type: :job do
     before { Sidekiq::Testing.inline! }
 
     it '60日以上経過したデータが削除されることを確認する' do
-      expect {
+      expect do
         DeleteOldRecordsJob.perform_async
-      }.to change { Group.exists?(@group_to_be_deleted.id) }.from(true).to(false)
+      end.to change { Group.exists?(@group_to_be_deleted.id) }.from(true).to(false)
     end
 
     it '最新のデータは削除されないことを確認する' do
