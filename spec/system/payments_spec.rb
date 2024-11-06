@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Payments", type: :system do
   before do
-    @payment = FactoryBot.create(:payment)
-    @group = Group.find(@payment.group_id)
+    @payments = FactoryBot.create_list(:payment, 3)
+    @group = Group.find(@payments[0].group_id)
     @members = Member.where(group_id: @group.group_id)
     visit group_show_path(@group.token)
   end
@@ -33,6 +33,16 @@ RSpec.describe "Payments", type: :system do
       find('i.bi.bi-check-circle').click
     end
     expect(page).to have_content "支払いが完了しました"
+  end
+
+  scenario "支払いをまとめて完了できること", js: true do
+    all('input[type="checkbox"]').each do |checkbox|
+      checkbox.check
+    end
+    page.accept_confirm do
+      click_button "まとめて完了"
+    end
+    expect(page).to have_content "選択された支払いを完了しました。"
   end
 
   scenario "支払い明細を絞り込み検索できること", js: true do
