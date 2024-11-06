@@ -3,7 +3,7 @@ FactoryBot.define do
     amount { 3000 }
     payment_date { "2024-01-01" }
     description { "test" }
-    created_at {Time.current}
+    created_at { Time.current }
     association :creditor_member, factory: :member
     association :debtor_member, factory: :member
     association :group
