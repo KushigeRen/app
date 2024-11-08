@@ -11,7 +11,7 @@ https://tatekae-record-e17f77fb7e74.herokuapp.com/
 <img src="https://github.com/user-attachments/assets/7f410e12-62c4-4b91-8111-5e1d360114f2" width="10%" />　　
 
 
-↓すでにある程度のデータを登録した状態で動作確認したい方はこちら↓  
+### ↓すでにある程度のデータを登録した状態で動作確認したい方はこちら↓  
 ーURLー  
 https://tatekae-record-e17f77fb7e74.herokuapp.com/group/99583529ce66e3d07dd2944e104fff1e
 
@@ -33,46 +33,57 @@ https://tatekae-record-e17f77fb7e74.herokuapp.com/group/99583529ce66e3d07dd2944e
 こちらもぜひご活用ください。  
 
 # 機能紹介（使い方）
-##グループ登録機能  
-URLにアクセスするとまずこの画面に遷移します。  
+## グループ登録機能  
+URLにアクセスするとまずこの画面に遷移します。 
+
 https://github.com/user-attachments/assets/719f1bd5-de60-4390-8166-6085f5f0dacf  
 
 ## 支払い明細記録機能  
 支払い明細を追加できます。  
-https://github.com/user-attachments/assets/29e7fd65-1225-4c5c-80b4-d42dd51f63fc  
+
+https://github.com/user-attachments/assets/3c01f10c-f836-4d7b-9fb2-b1d41557bd92  
+
 
 ## 支払い完了機能  
 支払い明細を完了状態にします。  
+
 https://github.com/user-attachments/assets/29123de0-59e2-4fb0-8184-4d9074830197  
 
 ## まとめて完了機能  
 複数の支払い明細をまとめて完了状態にします  
+
 https://github.com/user-attachments/assets/9979c104-da2d-4a35-9e1a-9ea943b8d72e  
 
 ## 支払い明細編集機能  
 支払い明細を編集できます。  
+
 https://github.com/user-attachments/assets/444b2421-8056-4e75-9c3e-87e40fbe17ca  
 
 ## 支払い明細絞り込み機能  
 支払ったメンバーで支払い明細を絞り込み検索できます。  
+
 https://github.com/user-attachments/assets/f92b2cd3-af15-4122-b4e6-3712aeff5987  
 
 ## グループ名編集機能  
 グループ名を編集できます。  
+
 https://github.com/user-attachments/assets/4187002a-70e5-4fc1-85ed-0d4cf413c584  
 
 ## メンバー編集・削除機能  
 メンバーを編集・削除できます。  
 メンバーに関連する支払い明細が存在する場合、削除はできません。  
+
 https://github.com/user-attachments/assets/5e943dff-081b-4f5d-92d0-f287288dcf96  
 
 ## URLコピー機能  
 グループのURLをコピーします。    
 メッセージアプリ等にこのURLを共有する想定です。  
+
 https://github.com/user-attachments/assets/3dc2159f-fdc5-420f-b7dd-c2012b7a8bcb  
 
 ## Googleカレンダー登録機能  
 支払い明細をGoogleカレンダーにイベントとして登録します。  
+
 https://github.com/user-attachments/assets/df468b06-8b0b-4c60-8b9c-5921ea3d3fbe  
 
 Google側の検証が完了していいないため、認証の際以下の警告画面が表示されます。  
@@ -120,10 +131,10 @@ masterブランチへのpushでは、RspecとRubocopが成功した場合、Hero
 -メンバーごとの支払額の合計を表示する機能  
 
 ## 経歴
-1995年1月24生（29歳（2024年11月8日現在））
-2020年7月〜現在 都内SES企業勤務
+1995年1月24生（29歳（2024年11月8日現在））  
+2020年7月〜現在 都内SES企業勤務  
 
-2023年10月~3月 ポテパンキャンプ受講
-2024年3月~現在　ポートフォリオ作成
+2023年10月〜3月 ポテパンキャンプ受講  
+2024年3月〜現在　ポートフォリオ作成
 
 
