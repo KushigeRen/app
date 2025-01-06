@@ -13,10 +13,10 @@ https://tatekae-record-e17f77fb7e74.herokuapp.com/
 
 ### ↓すでにある程度のデータを登録した状態で動作確認したい方はこちら↓  
 ーURLー  
-https://tatekae-record-e17f77fb7e74.herokuapp.com/group/99583529ce66e3d07dd2944e104fff1e
+https://tatekae-record-e17f77fb7e74.herokuapp.com/group/9aaf6a10d1d24c0e3d8e9f0bb0697ae4
 
 ーQRー  
-<img src="https://github.com/user-attachments/assets/606a8c6b-7ce0-442a-acd9-b218fadaabb0" width="10%" />　　
+<img src="https://github.com/user-attachments/assets/b218fa4b-612c-488d-9d00-4148301f78ed" width="10%" />　　
 
 # アプリについて  
 「仲間内での金銭のやり取りを手軽に記録したい。」という日常の中の小さなニーズに応えるためにこのアプリを開発しました。  
